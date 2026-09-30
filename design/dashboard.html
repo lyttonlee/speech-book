@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>语音书 · 工作台</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="shell">
+  <!-- 侧边导航 -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo"></div>
+      <div><div class="name">语音书</div><div class="sub">Speech-Book Studio</div></div>
+    </div>
+    <div class="nav-group">创作</div>
+    <div class="nav-item active" data-nav><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>工作台<span class="nav-badge">12</span></div>
+    <div class="nav-item" data-nav onclick="location.href='studio.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>新建作品</div>
+    <div class="nav-group">资源</div>
+    <div class="nav-item" data-nav onclick="location.href='voice-library.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg>音色库</div>
+    <div class="nav-item" data-nav><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>任务中心<span class="nav-badge">2</span></div>
+    <div class="nav-group">账户</div>
+    <div class="nav-item" data-nav onclick="location.href='settings.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>设置</div>
+    <div style="margin-top:auto" class="card row gap-3">
+      <div class="avatar" style="width:34px;height:34px;background:var(--grad)">D</div>
+      <div style="min-width:0"><div style="font-size:13px;font-weight:600">Demo 用户</div><div class="tiny muted">demo@speechbook.cn</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="search" style="width:320px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input class="input" placeholder="搜索作品 / 角色 / 任务…" />
+      </div>
+      <div class="right row gap-3">
+        <span class="badge ok"><span class="dot"></span>任务运行中 · 1</span>
+        <button class="btn btn-primary" onclick="location.href='studio.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>新建作品</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-head">
+        <div><h1>工作台</h1><div class="desc">管理你的有声书作品，继续未完成的合成流程。</div></div>
+      </div>
+
+      <!-- 统计 -->
+      <div class="grid cols-4 mb">
+        <div class="panel stat"><span class="k">作品总数</span><span class="v">12</span></div>
+        <div class="panel stat"><span class="k">合成完成</span><span class="v">7</span></div>
+        <div class="panel stat"><span class="k">进行中</span><span class="v">2</span></div>
+        <div class="panel stat"><span class="k">累计音频</span><span class="v">3.6<small> 小时</small></span></div>
+      </div>
+
+      <!-- 工具条 -->
+      <div class="row between mb">
+        <div class="segmented" data-seg="view">
+          <button class="active" data-seg-panel="view" data-val="grid">卡片视图</button>
+          <button data-seg-panel="view" data-val="list">列表视图</button>
+        </div>
+        <div class="row gap-2">
+          <select class="select" style="width:150px"><option>全部状态</option><option>草稿</option><option>待复核</option><option>合成完成</option></select>
+          <select class="select" style="width:130px"><option>最近更新</option><option>创建时间</option><option>名称</option></select>
+        </div>
+      </div>
+
+      <!-- 卡片视图 -->
+      <div data-seg-panel="view" data-val="grid" class="grid cols-3">
+        <div class="panel work-card" onclick="location.href='studio.html'">
+          <div class="work-cover"></div>
+          <div class="row between"><h4>星河彼端</h4><span class="badge ok"><span class="dot"></span>合成完成</span></div>
+          <div class="work-meta"><span>科幻</span>·<span>8 章</span>·<span>3 角色</span><span class="right">2 小时前</span></div>
+          <div class="progress thin"><i style="width:100%"></i></div>
+        </div>
+        <div class="panel work-card" onclick="location.href='studio.html'">
+          <div class="work-cover" style="background:linear-gradient(135deg,rgba(99,102,241,0.25),rgba(34,211,238,0.18))"></div>
+          <div class="row between"><h4>雾都夜行录</h4><span class="badge warn"><span class="dot"></span>待复核</span></div>
+          <div class="work-meta"><span>悬疑</span>·<span>12 章</span>·<span>5 角色</span><span class="right">昨天</span></div>
+          <div class="progress thin"><i style="width:55%"></i></div>
+        </div>
+        <div class="panel work-card" onclick="location.href='studio.html'">
+          <div class="work-cover" style="background:linear-gradient(135deg,rgba(251,191,36,0.20),rgba(251,113,133,0.18))"></div>
+          <div class="row between"><h4>山海食单</h4><span class="badge info"><span class="dot"></span>解析中</span></div>
+          <div class="work-meta"><span>奇幻</span>·<span>6 章</span>·<span>4 角色</span><span class="right">3 天前</span></div>
+          <div class="progress thin"><i style="width:32%"></i></div>
+        </div>
+        <div class="panel work-card" onclick="location.href='studio.html'">
+          <div class="work-cover" style="background:linear-gradient(135deg,rgba(52,211,153,0.20),rgba(56,189,248,0.18))"></div>
+          <div class="row between"><h4>无人书店</h4><span class="badge"><span class="dot"></span>草稿</span></div>
+          <div class="work-meta"><span>都市</span>·<span>1 章</span>·<span>未解析</span><span class="right">上周</span></div>
+          <div class="progress thin"><i style="width:6%"></i></div>
+        </div>
+        <div class="panel work-card" onclick="location.href='studio.html'">
+          <div class="work-cover" style="background:linear-gradient(135deg,rgba(56,189,248,0.28),rgba(99,102,241,0.14))"></div>
+          <div class="row between"><h4>长安十二时辰·同人</h4><span class="badge ok"><span class="dot"></span>合成完成</span></div>
+          <div class="work-meta"><span>历史</span>·<span>24 章</span>·<span>9 角色</span><span class="right">2 周前</span></div>
+          <div class="progress thin"><i style="width:100%"></i></div>
+        </div>
+        <!-- 新建卡片 -->
+        <div class="panel work-card" style="align-items:center;justify-content:center;border-style:dashed;text-align:center" onclick="location.href='studio.html'">
+          <div class="empty" style="padding:20px">
+            <div class="ic" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+            <b style="color:var(--text-1)">新建作品</b>
+            <p class="tiny mt-2">上传小说文本，开始制作</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 列表视图 -->
+      <div data-seg-panel="view" data-val="list" class="panel hide" style="padding:0">
+        <table class="table">
+          <thead><tr><th>作品</th><th>状态</th><th>章节</th><th>角色</th><th>更新时间</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><b style="color:var(--text-1)">星河彼端</b><div class="tiny muted">科幻</div></td><td><span class="badge ok"><span class="dot"></span>合成完成</span></td><td class="mono">8</td><td class="mono">3</td><td>2 小时前</td><td class="right"><button class="btn btn-sm" onclick="location.href='studio.html'">打开</button></td></tr>
+            <tr><td><b style="color:var(--text-1)">雾都夜行录</b><div class="tiny muted">悬疑</div></td><td><span class="badge warn"><span class="dot"></span>待复核</span></td><td class="mono">12</td><td class="mono">5</td><td>昨天</td><td class="right"><button class="btn btn-sm" onclick="location.href='studio.html'">打开</button></td></tr>
+            <tr><td><b style="color:var(--text-1)">山海食单</b><div class="tiny muted">奇幻</div></td><td><span class="badge info"><span class="dot"></span>解析中</span></td><td class="mono">6</td><td class="mono">4</td><td>3 天前</td><td class="right"><button class="btn btn-sm" onclick="location.href='studio.html'">打开</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="hint mt-8">交互说明：卡片/列表视图切换、点击作品进入工作室；状态徽标与进度条映射作品状态机（draft → parsing → pending_review → synthesizing → synth_done）。</p>
+    </div>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

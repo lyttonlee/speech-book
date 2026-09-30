@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>语音书 · 前端设计总览</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="content" style="max-width:1080px;margin:0 auto;padding-top:56px">
+  <div class="row gap-3 mb">
+    <div class="logo" style="width:44px;height:44px;border-radius:12px;background:var(--grad);position:relative;box-shadow:var(--glow-soft)"><div style="position:absolute;inset:11px;border:2px solid rgba(255,255,255,.92);border-radius:6px;border-right-color:transparent;border-bottom-color:transparent;transform:rotate(-20deg)"></div></div>
+    <div><h1 style="font-size:26px">语音书 · 前端整体设计</h1><div class="desc muted tiny mt-2">科技感 · 简洁 · 易操作 ｜ 高保真原型 v0.1 ｜ 2026-09-30</div></div>
+  </div>
+
+  <div class="panel mb">
+    <p class="sm dim">本套设计覆盖全部页面：统一深色科技风设计系统（蓝青渐变主题、玻璃拟态卡片、细网格背景），全流程围绕「上传 → 解析 → 绑定 → 合成」四步主链路。点击下方卡片进入各页面原型，所有交互（步骤切换 / Toast / 播放器 / Tab）均为静态演示，可直接浏览器打开。</p>
+  </div>
+
+  <div class="grid cols-3">
+    <a href="design-system.html" class="panel work-card" style="text-decoration:none">
+      <div class="work-cover" style="background:linear-gradient(135deg,rgba(56,189,248,.3),rgba(99,102,241,.2))"></div>
+      <h4>设计系统</h4><p class="tiny muted">色彩 / 字体 / 组件 / 状态与进度的整体规范基准。</p>
+    </a>
+    <a href="login.html" class="panel work-card" style="text-decoration:none">
+      <div class="work-cover" style="background:linear-gradient(135deg,rgba(34,211,238,.28),rgba(99,102,241,.16))"></div>
+      <div class="row between"><h4>登录 / 注册</h4><span class="tag">入口</span></div>
+      <p class="tiny muted">品牌卖点区 + 表单区，登录与注册切换，一键 Demo 体验。</p>
+    </a>
+    <a href="dashboard.html" class="panel work-card" style="text-decoration:none">
+      <div class="work-cover" style="background:linear-gradient(135deg,rgba(99,102,241,.26),rgba(56,189,248,.14))"></div>
+      <div class="row between"><h4>工作台</h4><span class="tag">列表</span></div>
+      <p class="tiny muted">作品统计、卡片/列表双视图、状态徽标与进度、搜索筛选。</p>
+    </a>
+    <a href="studio.html" class="panel work-card" style="text-decoration:none">
+      <div class="work-cover" style="background:linear-gradient(135deg,rgba(56,189,248,.24),rgba(52,211,153,.14))"></div>
+      <div class="row between"><h4>工作室（核心）</h4><span class="tag">主流程</span></div>
+      <p class="tiny muted">四步主链路：上传 → 解析确认 → 角色绑定 → 合成试听（SSE 进度 + 波形播放器）。</p>
+    </a>
+    <a href="voice-library.html" class="panel work-card" style="text-decoration:none">
+      <div class="work-cover" style="background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(56,189,248,.16))"></div>
+      <div class="row between"><h4>音色库</h4><span class="tag">资源</span></div>
+      <p class="tiny muted">内置音色与克隆音色管理、试听、标签筛选、上传克隆入口。</p>
+    </a>
+    <a href="settings.html" class="panel work-card" style="text-decoration:none">
+      <div class="work-cover" style="background:linear-gradient(135deg,rgba(251,191,36,.16),rgba(251,113,133,.14))"></div>
+      <div class="row between"><h4>设置</h4><span class="tag">账户</span></div>
+      <p class="tiny muted">资料、创作偏好（默认音色/合成范围）、安全与关于。</p>
+    </a>
+  </div>
+
+  <div class="panel mt-8">
+    <div class="card-h"><h3>配套文档</h3></div>
+    <p class="sm dim">完整设计说明（设计原则、页面清单、Token 表、交互逻辑、与现有 Vue 前端的接入对照）见 <a href="DESIGN_SPEC.md">DESIGN_SPEC.md</a>。</p>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

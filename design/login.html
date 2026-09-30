@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>语音书 · 登录 / 注册</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="auth">
+  <!-- 左：品牌/卖点区 -->
+  <section class="hero">
+    <div class="glow-orb"></div>
+    <div class="glow-orb b"></div>
+    <div class="brand">
+      <div class="logo"></div>
+      <div><div class="name">语音书</div><div class="sub">Speech-Book Studio</div></div>
+    </div>
+    <div>
+      <h1 style="font-size:40px;line-height:1.25;letter-spacing:-0.02em">把小说，<br/>变成<span class="text-grad">多角色有声书</span></h1>
+      <p class="dim mt" style="max-width:420px">上传文本 → 智能解析角色与情绪 → 绑定音色 → 一键合成样章。全流程可视化，先听样章再全本。</p>
+      <div class="feature-list">
+        <div class="feature">
+          <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></div>
+          <div><b>智能解析</b><p>自动分章、区分叙述/对话/心理，识别说话人与情绪强度。</p></div>
+        </div>
+        <div class="feature">
+          <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></div>
+          <div><b>多角色音色</b><p>旁白与角色分别绑定音色，样章先行验证效果。</p></div>
+        </div>
+        <div class="feature">
+          <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><b>进度实时可见</b><p>解析与合成全程 SSE 实时进度，任务状态一目了然。</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="tiny muted">© 2026 Speech-Book · POC 原型</p>
+  </section>
+
+  <!-- 右：表单区 -->
+  <section class="panel-card">
+    <div class="form-card">
+      <div class="row between mb">
+        <h2 style="font-size:24px" id="form-title">欢迎回来</h2>
+        <span class="badge acc"><span class="dot"></span>POC</span>
+      </div>
+
+      <!-- 登录表单 -->
+      <div id="pane-login">
+        <div class="field"><label class="label">邮箱</label><input class="input" type="email" placeholder="you@example.com" value="demo@speechbook.cn" /></div>
+        <div class="field"><label class="label">密码</label><input class="input" type="password" placeholder="••••••••" value="secret123" /></div>
+        <div class="row between tiny mb">
+          <label class="row gap-2 tiny" style="cursor:pointer"><input type="checkbox" checked /> 记住我</label>
+          <a href="#" onclick="return false">忘记密码？</a>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" onclick="location.href='dashboard.html'">登 录</button>
+        <button class="btn btn-block mt" onclick="location.href='studio.html'">⚡ 一键体验 Demo（无需注册）</button>
+        <p class="hint center" style="text-align:center">还没有账号？<a href="#" onclick="SB.switch('register');return false">立即注册</a></p>
+      </div>
+
+      <!-- 注册表单 -->
+      <div id="pane-register" class="hide">
+        <div class="field"><label class="label">昵称</label><input class="input" placeholder="你的昵称" /></div>
+        <div class="field"><label class="label">邮箱</label><input class="input" type="email" placeholder="you@example.com" /></div>
+        <div class="field"><label class="label">密码</label><input class="input" type="password" placeholder="至少 8 位，含字母与数字" /></div>
+        <div class="field"><label class="label">确认密码</label><input class="input" type="password" placeholder="再次输入密码" /></div>
+        <button class="btn btn-primary btn-lg btn-block" onclick="SB.toast('注册成功，请登录')">创建账号</button>
+        <p class="hint" style="text-align:center">已有账号？<a href="#" onclick="SB.switch('login');return false">返回登录</a></p>
+      </div>
+
+      <hr class="divider" />
+      <div class="row gap-3 center" style="justify-content:center">
+        <a class="tiny muted" href="design-system.html">设计系统</a>
+        <span class="muted">·</span><a class="tiny muted" href="dashboard.html">工作台</a>
+        <span class="muted">·</span><a class="tiny muted" href="studio.html">工作室</a>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="assets/app.js"></script>
+<script>
+  SB.switch = function (mode) {
+    var login = document.getElementById('pane-login'), reg = document.getElementById('pane-register');
+    var isLogin = mode === 'login';
+    login.classList.toggle('hide', !isLogin); reg.classList.toggle('hide', isLogin);
+    document.getElementById('form-title').textContent = isLogin ? '欢迎回来' : '创建账号';
+  };
+</script>
+</body>
+</html>
