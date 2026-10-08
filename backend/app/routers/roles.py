@@ -36,6 +36,59 @@ async def merge_role(work_id: int, role_id: int, body: dict,
     return ok({"id": target.id, "name": target.name})
 
 
+@router.get("/{role_id}/stats")
+async def role_stats(work_id: int, role_id: int, db: AsyncSession = Depends(get_db),
+                     user: User = Depends(get_current_user)):
+    """角色台词统计（§7.5）：台词数 / 覆盖章节数 / 平均句长。"""
+    await work_service.get_owned(db, work_id, user.id)
+    return ok(await role_service.role_stats(db, work_id, role_id))
+
+
+@router.patch("/{role_id}")
+async def update_role(work_id: int, role_id: int, body: dict,
+                      db: AsyncSession = Depends(get_db),
+                      user: User = Depends(get_current_user)):
+    """改角色名 / 级别 / 别名 / 画像（§7.3）。
+
+    降为龙套就是把 level 改成 extra（龙套走默认旁白/群杂，不强制绑音色）。
+    每个被改字段都会写一条修改留痕，前端「修改留痕」区块可查 diff 与回滚。
+    """
+    await work_service.get_owned(db, work_id, user.id)
+    role = await role_service.update_role(db, work_id, role_id, body or {}, user.id)
+    return ok({"id": role.id, "name": role.name, "level": role.level, "aliases": role.aliases})
+
+
+@router.delete("/{role_id}")
+async def delete_role(work_id: int, role_id: int, db: AsyncSession = Depends(get_db),
+                      user: User = Depends(get_current_user)):
+    """删除角色（破坏性操作，前端已二次确认）。
+
+    删除后该角色名下的片段会变成未归属（speaker_role_id=NULL），
+    需要重新指派说话人，因此前端会提示「台词会变为未归属」。
+    """
+    await work_service.get_owned(db, work_id, user.id)
+    await role_service.delete_role(db, work_id, role_id, user.id)
+    return ok({"deleted": role_id})
+
+
+@router.post("/{role_id}/split")
+async def split_role(work_id: int, role_id: int, body: dict,
+                     db: AsyncSession = Depends(get_db),
+                     user: User = Depends(get_current_user)):
+    """拆分角色：把指定片段从原角色拆到新角色（工作空间「角色合并拆分」用）。
+
+    body = { "segment_ids": [...], "new_name": "角色B" }
+    """
+    await work_service.get_owned(db, work_id, user.id)
+    res = await role_service.split_role(
+        db, work_id, role_id,
+        segment_ids=body.get("segment_ids", []),
+        new_name=body.get("new_name", ""),
+        user_id=user.id,
+    )
+    return ok(res)
+
+
 @router.get("/{role_id}/recommend-voices")
 async def recommend(work_id: int, role_id: int, top: int = 5,
                    db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):

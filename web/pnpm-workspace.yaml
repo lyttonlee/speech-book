@@ -1,5 +1,9 @@
 packages:
   - '.'
+# 本机 Windows 环境禁止创建符号链接（symlink 静默失败 → 依赖目录全空、
+# 运行报 "Cannot find module 'xxx'"）。改用 hoisted 链接器：扁平写入 node_modules，
+# 不依赖 symlink。CI/生产环境若具备 symlink 权限，请删掉本行恢复默认 isolated。
+nodeLinker: hoisted
 allowBuilds:
   esbuild: true
   vue-demi: true

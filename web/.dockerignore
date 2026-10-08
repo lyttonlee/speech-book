@@ -1,0 +1,9 @@
+# 本地开发产物与依赖不进构建上下文
+node_modules/
+dist/
+.vite/
+*.local
+.DS_Store
+.git/
+npm-debug.log*
+pnpm-debug.log*

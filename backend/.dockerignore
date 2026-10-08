@@ -1,0 +1,14 @@
+# 不需要进镜像上下文的东西：本地虚拟环境、数据库文件、测试缓存
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+*.db
+.env
+.env.example
+tests/
+conftest.py
+.md
+Dockerfile
+.dockerignore

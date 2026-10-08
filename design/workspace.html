@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>语音书 · 工作空间 · 星河彼端</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="shell">
+  <!-- ============ 侧边导航（沿用全局设计系统） ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo"></div>
+      <div><div class="name">语音书</div><div class="sub">Speech-Book Studio</div></div>
+    </div>
+    <div class="nav-group">创作</div>
+    <div class="nav-item" data-nav onclick="location.href='dashboard.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>工作台<span class="nav-badge">12</span></div>
+    <div class="nav-item active" data-nav><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>我的作品空间</div>
+    <div class="nav-item" data-nav onclick="location.href='studio.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>新建作品</div>
+    <div class="nav-group">资源</div>
+    <div class="nav-item" data-nav onclick="location.href='voice-library.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg>音色库<span class="nav-badge">18</span></div>
+    <div class="nav-item" data-nav><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>任务中心<span class="nav-badge">1</span></div>
+    <div class="nav-group">账户</div>
+    <div class="nav-item" data-nav onclick="location.href='settings.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>设置</div>
+    <div style="margin-top:auto" class="card row gap-3">
+      <div class="avatar" style="width:34px;height:34px;background:var(--grad)">D</div>
+      <div style="min-width:0"><div style="font-size:13px;font-weight:600">Demo 用户</div><div class="tiny muted">demo@speechbook.cn</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="row gap-3">
+        <button class="btn btn-ghost btn-sm" onclick="location.href='dashboard.html'">← 返回工作台</button>
+        <div class="muted tiny hide" style="border-left:1px solid var(--line);padding-left:14px">工作台 / <b style="color:var(--text-1)">星河彼端</b></div>
+      </div>
+      <div class="right row gap-3">
+        <span class="badge acc"><span class="dot"></span>自动保存已开启</span>
+        <button class="btn btn-ghost btn-sm" data-act="任务中心（演示）">任务中心</button>
+        <button class="btn btn-primary" data-act="已加入制作队列">继续制作 →</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- ============ 1. 作品头（身份 + 状态机 + 整体完成度） ============ -->
+      <div class="panel mb">
+        <div class="work-hero">
+          <div class="cover" style="background:linear-gradient(135deg,rgba(56,189,248,.34),rgba(99,102,241,.28))">
+            <div class="cover-mark">星</div>
+          </div>
+          <div>
+            <div class="row gap-3 wrap">
+              <h1 class="htitle" style="font-size:24px">星河彼端</h1>
+              <span class="badge ok"><span class="dot"></span>合成中 72%</span>
+              <span class="tag">科幻</span>
+              <span class="tag">8 章</span>
+              <span class="tag">已校对 8/8 章</span>
+            </div>
+            <div class="hmeta">共 128,460 字 · 解析于 10-01 21:14 · 最近人工调整 10-02 15:06 · 制作人 Demo 用户</div>
+            <!-- 状态机链路：已完成段（done）/ 当前段（cur）/ 未来段（默认） -->
+            <div class="state-chain">
+              <span class="s done">草稿</span><span class="sep">→</span>
+              <span class="s done">文本已上传</span><span class="sep">→</span>
+              <span class="s done">解析中</span><span class="sep">→</span>
+              <span class="s done">待校对</span><span class="sep">→</span>
+              <span class="s done">校对完成</span><span class="sep">→</span>
+              <span class="s cur">合成中</span><span class="sep">→</span>
+              <span class="s">合成完成</span><span class="sep">→</span>
+              <span class="s">导出中</span><span class="sep">→</span>
+              <span class="s">已完成</span>
+            </div>
+          </div>
+          <div class="hero-pie">
+            <div class="ring">
+              <svg viewBox="0 0 92 92">
+                <defs><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#6366f1"/>
+                </linearGradient></defs>
+                <circle class="r-bg" cx="46" cy="46" r="38"></circle>
+                <circle class="r-fg" id="ringFg" cx="46" cy="46" r="38" stroke-dasharray="238.7" stroke-dashoffset="66.4"></circle>
+              </svg>
+              <div class="r-txt">72<small>%</small></div>
+            </div>
+            <div class="hp-info">
+              <div class="k">整体完成度</div>
+              <div class="v">72<small style="font-size:13px;color:var(--text-3)"> / 5 个阶段</small></div>
+              <div class="tiny muted mt-2">下一目标：合成完成（约 剩余 6 章）</div>
+              <div class="row gap-2 mt-2">
+                <button class="btn btn-sm" data-act="已生成导出预览">导出预览</button>
+                <button class="btn btn-sm btn-danger" data-act-type="err" data-act="作品已归档">归档</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ 2. 制作进度流水线（横向 6 段，每段可人工介入） ============ -->
+        <div class="pipeline">
+          <div class="pipe-stage done" data-goto="#chapters">
+            <span class="s-line"></span><span class="s-dot">✓</span>
+            <div class="s-name">文本上传</div>
+            <div class="s-time">128,460 字</div>
+            <div class="s-foot"><span class="badge ok"><span class="dot"></span>完成</span></div>
+          </div>
+          <div class="pipe-stage done" data-goto="#chapters">
+            <span class="s-line"></span><span class="s-dot">✓</span>
+            <div class="s-name">解析</div>
+            <div class="s-time">42s · 8 章 126 段</div>
+            <div class="s-foot"><span class="badge ok"><span class="dot"></span>完成</span><button class="btn btn-sm" data-pipe-act="已重跑解析（保留人工修正）">↻ 重跑</button></div>
+          </div>
+          <div class="pipe-stage done" data-goto="#chapters">
+            <span class="s-line"></span><span class="s-dot">✓</span>
+            <div class="s-name">人工校对</div>
+            <div class="s-time">17 处修改</div>
+            <div class="s-foot"><span class="badge ok"><span class="dot"></span>完成</span><button class="btn btn-sm" data-pipe-act="已回到校对（从 Ch.5 起）">✎ 再校对</button></div>
+          </div>
+          <div class="pipe-stage done" data-goto="#cast">
+            <span class="s-line"></span><span class="s-dot">✓</span>
+            <div class="s-name">声纹绑定</div>
+            <div class="s-time">3/4 已绑 · 1 待定</div>
+            <div class="s-foot"><span class="badge ok"><span class="dot"></span>完成</span><button class="btn btn-sm" data-pipe-act="已解除绑定并回到待校对">↺ 解绑重选</button></div>
+          </div>
+          <div class="pipe-stage active" data-goto="#audio">
+            <span class="s-line"></span><span class="s-dot">4</span>
+            <div class="s-name">合成配音</div>
+            <div class="s-time">Ch.1-2 完成 · Ch.3 72%</div>
+            <div class="s-foot"><span class="badge info"><span class="dot"></span>进行中</span><button class="btn btn-sm" data-pipe-act="已提升合成优先级">▲ 提速</button></div>
+          </div>
+          <div class="pipe-stage idle" data-goto="#export">
+            <span class="s-line"></span><span class="s-dot">5</span>
+            <div class="s-name">导出成品</div>
+            <div class="s-time">待全部合成</div>
+            <div class="s-foot"><span class="badge"><span class="dot"></span>未开始</span><button class="btn btn-sm" data-pipe-act="已预生成导出配置">⚙ 预设</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ 3. 工作空间二级子导航（锚点吸顶） ============ -->
+      <nav class="subnav">
+        <a class="sub-link active" href="#overview">总览汇总</a>
+        <a class="sub-link" href="#cast">角色与声纹 <span class="cnt">4</span></a>
+        <a class="sub-link" href="#graph">关系图 <span class="cnt">9</span></a>
+        <a class="sub-link" href="#chapters">已解析章节 <span class="cnt">126 段</span></a>
+        <a class="sub-link" href="#audio">已制作配音 <span class="cnt">7 条</span></a>
+        <a class="sub-link" href="#audit">修改留痕 <span class="cnt">17</span></a>
+        <a class="sub-link" href="#export">导出成品</a>
+        <a class="sub-link right" href="#" data-act="已同步到云端（演示）">↻ 同步状态</a>
+      </nav>
+
+      <!-- ============ 4. 总览：解析内容汇总 ============ -->
+      <section class="section anchor" id="overview">
+        <div class="sec-head">
+          <div>
+            <h2>解析内容汇总</h2>
+            <div class="desc">AI 对本书的全部解析产出，一处归集、随时可改。</div>
+          </div>
+          <button class="btn btn-sm sec-fold" data-act="已导出解析报告（JSON）">导出解析报告</button>
+        </div>
+
+        <!-- 量化指标 -->
+        <div class="metrics mb">
+          <div class="metric"><span class="mk">章节</span><span class="mv">8</span><span class="mu">已解析 8</span></div>
+          <div class="metric"><span class="mk">片段</span><span class="mv">126</span><span class="mu">对话 54 · 叙述 52 · 心理 20</span></div>
+          <div class="metric hl"><span class="mk">角色</span><span class="mv">5</span><span class="mu">含旁白 · 4 位人物</span></div>
+          <div class="metric warn"><span class="mk">声纹绑定</span><span class="mv">3<small>/4</small></span><span class="mu">林晚待定</span></div>
+          <div class="metric"><span class="mk">情绪类别</span><span class="mv">12</span><span class="mu">最高频「坚定」×23</span></div>
+          <div class="metric ok"><span class="mk">已配音</span><span class="mv">42<small>min</small></span><span class="mu">7 条音频资产</span></div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1.15fr .95fr 1.3fr">
+          <!-- 4.1 角色总览 -->
+          <div class="panel">
+            <div class="card-h"><h3>角色总览</h3><span class="sub">点选联动右侧关系图</span></div>
+            <div class="role-grid">
+              <div class="role-card sel" data-role-card>
+                <div class="rc-head">
+                  <div class="avatar" style="background:#38bdf8">旁</div>
+                  <div><div class="rc-name">旁白</div><div class="rc-sub">叙述 52 段 · 12,480 字</div></div>
+                </div>
+                <div class="rc-tags"><span class="tag">中性</span><span class="tag">少年感</span></div>
+                <div class="rc-foot"><span class="badge ok"><span class="dot"></span>已采纳</span><button class="btn btn-sm" data-act="已绑定：旁白 · 中性·沉稳">已绑定</button></div>
+              </div>
+              <div class="role-card" data-role-card>
+                <div class="rc-head">
+                  <div class="avatar" style="background:#6366f1">张</div>
+                  <div><div class="rc-name">张三</div><div class="rc-sub">对话 23 段 · 主角</div></div>
+                </div>
+                <div class="rc-tags"><span class="tag">男</span><span class="tag">坚毅</span><span class="tag">急切</span></div>
+                <div class="conf-row mt-2"><span>识别置信</span><span class="conf-bar"><i style="width:93%"></i></span><span class="cv">0.93</span></div>
+                <div class="rc-foot"><span class="badge ok"><span class="dot"></span>已采纳</span><button class="btn btn-sm" data-act="已绑定：男声 · 青年·低沉">已绑定</button></div>
+              </div>
+              <div class="role-card" data-role-card>
+                <div class="rc-head">
+                  <div class="avatar" style="background:#22d3ee">李</div>
+                  <div><div class="rc-name">李四</div><div class="rc-sub">对话 19 段</div></div>
+                </div>
+                <div class="rc-tags"><span class="tag">女</span><span class="tag">温柔</span><span class="tag">担忧</span></div>
+                <div class="conf-row mt-2"><span>识别置信</span><span class="conf-bar"><i style="width:88%"></i></span><span class="cv">0.88</span></div>
+                <div class="rc-foot"><span class="badge ok"><span class="dot"></span>已采纳</span><button class="btn btn-sm" data-act="已绑定：女声 · 青年·清澈">已绑定</button></div>
+              </div>
+              <div class="role-card" data-role-card>
+                <div class="rc-head">
+                  <div class="avatar" style="background:#fbbf24">船</div>
+                  <div><div class="rc-name">老船长</div><div class="rc-sub">对话 8 段 · 配角</div></div>
+                </div>
+                <div class="rc-tags"><span class="tag">男</span><span class="tag">粗粝</span><span class="tag">沙哑</span></div>
+                <div class="conf-row mt-2"><span>识别置信</span><span class="conf-bar"><i style="width:71%"></i></span><span class="cv">0.71</span></div>
+                <div class="rc-foot"><span class="badge warn"><span class="dot"></span>待确认</span><button class="btn btn-sm" data-act="已绑定：克隆音色「老陈」（本人授权）">已绑定</button></div>
+              </div>
+              <div class="role-card" data-role-card>
+                <div class="rc-head">
+                  <div class="avatar" style="background:#fb7185">林</div>
+                  <div><div class="rc-name">林晚</div><div class="rc-sub">对话 12 段 · 龙套</div></div>
+                </div>
+                <div class="rc-tags"><span class="tag">女</span><span class="tag">冷静</span></div>
+                <div class="conf-row mt-2"><span>识别置信</span><span class="conf-bar low"><i style="width:54%"></i></span><span class="cv">0.54</span></div>
+                <div class="rc-foot"><span class="badge warn"><span class="dot"></span>未绑定</span><button class="btn btn-sm" data-act="已为「林晚」绑定：女声 · 冷冽">立即绑定</button></div>
+              </div>
+              <div class="role-card" style="align-items:center;justify-content:center;border-style:dashed;text-align:center" onclick="SB.toast('已新建角色（演示）')">
+                <div class="empty" style="padding:16px">
+                  <div class="ic" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+                  <b style="color:var(--text-1)">新增角色</b>
+                  <p class="tiny mt-2">从台词里拆出隐藏说话人</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4.2 声纹绑定总览 -->
+          <div class="panel">
+            <div class="card-h"><h3>声纹绑定总览</h3><span class="sub">4 个说话人 · 3 内置 + 1 克隆</span></div>
+            <div class="vp-wrap">
+              <div class="ring" style="width:76px;height:76px">
+                <!-- 第二个环形也需自带渐变定义，否则 url(#ringGrad) 取不到会画成透明 -->
+                <svg viewBox="0 0 92 92">
+                  <defs><linearGradient id="ringGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#6366f1"/>
+                  </linearGradient></defs>
+                  <circle class="r-bg" cx="46" cy="46" r="38"></circle>
+                  <circle class="r-fg" cx="46" cy="46" r="38" stroke="url(#ringGrad2)" stroke-dasharray="238.7" stroke-dashoffset="59.7"></circle>
+                </svg>
+                <div class="r-txt">75<small>%</small></div>
+              </div>
+              <div class="vp-list">
+                <div class="vp-item">
+                  <span class="vp-ic" style="color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+                  <div class="vp-t"><b>旁白</b><span>「旁白 · 中性·沉稳」· 内置</span></div>
+                  <span class="badge ok"><span class="dot"></span>可用</span>
+                </div>
+                <div class="vp-item">
+                  <span class="vp-ic" style="color:var(--accent-2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></span>
+                  <div class="vp-t"><b>张三 / 李四</b><span>「男声·青年低沉」「女声·青年清澈」· 内置</span></div>
+                  <span class="badge ok"><span class="dot"></span>可用</span>
+                </div>
+                <div class="vp-item">
+                  <span class="vp-ic" style="color:var(--warn)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 16H3z"/><path d="M12 9v5M12 17h.01"/></svg></span>
+                  <div class="vp-t"><b>老船长</b><span>「老陈」· 克隆 · 授权 10-01</span></div>
+                  <span class="badge warn"><span class="dot"></span>待复核</span>
+                </div>
+                <div class="vp-item">
+                  <span class="vp-ic" style="color:var(--text-3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M5 12h14"/></svg></span>
+                  <div class="vp-t"><b>林晚</b><span>未绑定 · 走默认旁白</span></div>
+                  <button class="btn btn-sm" data-act="已为「林晚」绑定：女声 · 冷冽">绑定</button>
+                </div>
+              </div>
+            </div>
+            <!-- 克隆音色的合规前置清单（实名 / 授权书 / 声纹核验 / 水印） -->
+            <div class="mt">
+              <div class="label">克隆音色合规前置</div>
+              <div class="compliance">
+                <span class="ci pass">实名认证 ✓</span><span class="ci pass">授权书 ✓</span>
+                <span class="ci pass">声纹核验 ✓</span><span class="ci pass">禁公众人物 ✓</span>
+                <span class="ci pass">隐式水印 ✓</span><span class="ci">一键下线</span>
+              </div>
+            </div>
+            <button class="btn btn-block mt" data-act="前往音色库管理">管理音色库 →</button>
+          </div>
+
+          <!-- 4.3 关系图（概览缩略） -->
+          <div class="panel">
+            <div class="card-h"><h3>人物关系图</h3><span class="sub">抽取 9 条 · 2 条待确认</span><a class="btn btn-sm sec-fold" href="#graph">在下方编辑 →</a></div>
+            <div class="graph-stage" style="border:1px solid var(--line-faint);border-radius:var(--r-sm)">
+              <svg id="graphMini" viewBox="0 0 420 250" style="height:250px"></svg>
+              <div class="graph-legend">
+                <span class="gl"><i style="background:#38bdf8"></i>旁白叙述</span>
+                <span class="gl"><i style="background:#a78bfa"></i>人物关系</span>
+                <span class="gl"><i style="background:#fbbf24;border-top:2px dashed #fbbf24;height:0"></i>待确认</span>
+              </div>
+            </div>
+            <div class="row gap-2 mt">
+              <span class="badge"><span class="dot"></span>中心度最高：张三</span>
+              <span class="badge warn"><span class="dot"></span>悬空节点：0</span>
+              <span class="right tiny muted">线宽 = 关系强度</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 5. 角色与声纹绑定（人工调整主战场） ============ -->
+      <section class="section anchor" id="cast">
+        <div class="sec-head">
+          <div>
+            <h2>角色与声纹绑定</h2>
+            <div class="desc">解析出的角色 → 音色映射，全部字段可人工覆盖，改动即时生效并重合成。</div>
+          </div>
+        </div>
+
+        <!-- 待处理警示 -->
+        <div class="notice">
+          <span class="ni" style="color:var(--warn)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+          <span class="nt"><b>1 个角色未绑定音色</b>，现按默认旁白合成；另有 2 段说话人识别置信度低于 0.6，建议先复核再提交。</span>
+          <button class="btn btn-sm" data-act="已为「林晚」绑定：女声 · 冷冽">补绑林晚</button>
+          <button class="btn btn-sm btn-ghost" data-act="已打开低置信复核队列">处理 2 条低置信</button>
+        </div>
+
+        <div class="act-bar mb">
+          <span class="ab-note">批量调整</span><span class="ab-sep"></span>
+          <button class="btn btn-sm" data-act="自动匹配已按画像标签重新推荐（Top-3）">⚡ 自动匹配推荐</button>
+          <button class="btn btn-sm" data-act="未绑定角色已全部绑定">一键绑定未绑定</button>
+          <button class="btn btn-sm btn-ghost" data-act="已恢复全部为解析推荐值">↺ 重置全部</button>
+          <span class="ab-sep"></span>
+          <label class="row gap-2 tiny muted" style="cursor:pointer"><input type="checkbox" data-act="切换：片段级覆盖角色参数" /> 允许片段级覆盖角色参数</label>
+          <span class="right tiny muted">改动将记入「修改留痕」并触发增量重合成</span>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1.55fr 1fr;align-items:start">
+          <!-- 5.1 绑定行（可编辑） -->
+          <div class="panel">
+            <div class="card-h"><h3>绑定明细</h3><span class="sub">音色 · 语速 · 音高 · 置信复核</span>
+              <span class="saving-flag right" data-saving-flag>已保存 · 已记入修改日志</span></div>
+
+            <div class="bind-row">
+              <div class="avatar" style="background:#38bdf8">旁</div>
+              <div class="who"><div><b class="editable" data-act="已重命名：旁白">旁白</b><div class="tiny muted">叙述 52 段 · 固定 role_id=0</div></div></div>
+              <div class="sel"><select class="select" data-act="旁白音色已切换"><option>旁白 · 中性·沉稳（当前）</option><option>男声 · 青年·低沉</option><option>女声 · 青年·清澈</option></select></div>
+              <div class="acts"><button class="btn btn-ghost btn-sm" data-play="旁白 · 试听 3 秒" data-play-sub="00:00 / 00:03">▶ 试听</button></div>
+            </div>
+            <div class="param-row mt"><span class="pname">语速</span><input type="range" class="slider" min="0.5" max="2" step="0.1" value="1" /><span class="pval"></span></div>
+            <div class="param-row"><span class="pname">音高</span><input type="range" class="slider" min="-12" max="12" step="1" value="0" data-unit="st" /><span class="pval"></span></div>
+
+            <div class="bind-row mt-6">
+              <div class="avatar" style="background:#6366f1">张</div>
+              <div class="who"><div><b class="editable" data-act="已重命名为：张三（张衡）">张三</b><div class="tiny muted">对话 23 段 · 主角 · 画像：男/坚毅/急切</div></div></div>
+              <div class="sel"><select class="select" data-act="张三音色已切换"><option>男声 · 青年·低沉（当前）</option><option>旁白 · 中性·沉稳</option><option>克隆「老陈」</option></select></div>
+              <div class="acts"><button class="btn btn-ghost btn-sm" data-play="张三 · 试听 3 秒" data-play-sub="00:00 / 00:03">▶ 试听</button></div>
+            </div>
+            <div class="param-row mt"><span class="pname">语速</span><input type="range" class="slider" min="0.5" max="2" step="0.1" value="1.12" /><span class="pval"></span></div>
+            <div class="param-row"><span class="pname">音高</span><input type="range" class="slider" min="-12" max="12" step="1" value="2" data-unit="st" /><span class="pval"></span></div>
+
+            <div class="bind-row mt-6">
+              <div class="avatar" style="background:#22d3ee">李</div>
+              <div class="who"><div><b class="editable" data-act="已重命名为：李四">李四</b><div class="tiny muted">对话 19 段 · 画像：女/温柔/担忧</div></div></div>
+              <div class="sel"><select class="select" data-act="李四音色已切换"><option>女声 · 青年·清澈（当前）</option><option>女声 · 少年·清脆</option><option>旁白 · 中性·沉稳</option></select></div>
+              <div class="acts"><button class="btn btn-ghost btn-sm" data-play="李四 · 试听 3 秒" data-play-sub="00:00 / 00:03">▶ 试听</button></div>
+            </div>
+            <div class="param-row mt"><span class="pname">语速</span><input type="range" class="slider" min="0.5" max="2" step="0.1" value="0.94" /><span class="pval"></span></div>
+            <div class="param-row"><span class="pname">音高</span><input type="range" class="slider" min="-12" max="12" step="1" value="-1" data-unit="st" /><span class="pval"></span></div>
+            <div class="conf-row mt-2"><span>识别置信 0.88</span><span class="conf-bar"><i style="width:88%"></i></span><button class="btn btn-sm" data-act="已提交人工确认（0.88）">确认</button></div>
+
+            <div class="bind-row mt-6" style="border-color:rgba(251,191,36,.35)">
+              <div class="avatar" style="background:#fbbf24">船</div>
+              <div class="who"><div><b class="editable" data-act="已重命名：老船长">老船长</b><div class="tiny muted">对话 8 段 · 克隆音色「老陈」· 授权 10-01</div></div></div>
+              <div class="sel"><select class="select" data-act="老船长音色已切换"><option>克隆 · 老陈（当前）</option><option>男声 · 老年·沙哑</option><option>旁白 · 中性·沉稳</option></select></div>
+              <div class="acts"><button class="btn btn-ghost btn-sm" data-play="老船长 · 试听 3 秒" data-play-sub="00:00 / 00:03">▶ 试听</button></div>
+            </div>
+            <div class="row between mt">
+              <span class="tiny muted">低置信 0.71 · 建议人工确认说话人归属</span>
+              <button class="btn btn-sm" data-act="已提交人工确认（0.71）">确认归属</button>
+            </div>
+
+            <div class="bind-row mt-6" style="border-color:rgba(251,113,133,.35)">
+              <div class="avatar" style="background:var(--bg-glass-2);border:1px dashed var(--line-strong)">?</div>
+              <div class="who"><div><b class="editable" data-act="已重命名为：林晚">林晚</b><div class="tiny muted">对话 12 段 · 龙套 · <span style="color:var(--warn)">未绑定</span></div></div></div>
+              <div class="sel"><select class="select" data-act="林晚音色已切换"><option disabled>请选择音色…</option><option>女声 · 冷冽（推荐）</option><option>女声 · 青年·清澈</option><option>旁白 · 中性·沉稳</option></select></div>
+              <div class="acts"><button class="btn btn-sm btn-primary" data-act="林晚 已绑定 · 女声·冷冽">绑定</button></div>
+            </div>
+            <div class="conf-row mt-2"><span>识别置信 0.54（低）</span><span class="conf-bar low"><i style="width:54%"></i></span><button class="btn btn-sm" data-act="该段说话人已改判为「李四」">改判为李四</button></div>
+
+            <div class="row gap-3 mt-6">
+              <button class="btn btn-primary" data-act="绑定已保存 · 增量重合成已入队">保存绑定并增量重合成</button>
+              <button class="btn btn-ghost" data-act="已取消全部未保存修改">放弃改动</button>
+              <span class="tiny muted">不会重跑解析，仅重算受影响片段</span>
+            </div>
+          </div>
+
+          <!-- 5.2 绑定预览 + 情绪映射 -->
+          <div class="col gap-4">
+            <div class="panel">
+              <div class="card-h"><h3>绑定预览</h3><span class="sub">第 1 章开头</span></div>
+              <div class="player mt-2">
+                <button class="play" data-play="星河彼端 · 第1章 启航（样章）" data-play-sub="00:00 / 03:42"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+                <div class="wave" id="wpv2"></div>
+                <div class="time">00:00 / 03:42</div>
+              </div>
+              <ul class="tiny muted mt" style="padding-left:18px;margin:10px 0 0;line-height:2">
+                <li>旁白 → 中性低音，节奏平稳</li>
+                <li>张三 → 男声 · 语速 +12%、音高 +2st</li>
+                <li>李四 → 女声 · 语速 -6%、音高 -1st</li>
+                <li>老船长 → 克隆「老陈」· 待复核</li>
+              </ul>
+              <button class="btn btn-block mt" data-act="已生成 30 秒绑定对比样音">生成 A/B 对比样音</button>
+            </div>
+            <div class="panel">
+              <div class="card-h"><h3>情绪 → 韵律映射</h3><span class="sub">EmotionIR</span></div>
+              <table class="table">
+                <thead><tr><th>情绪</th><th>语速</th><th>音高</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>急切</td><td class="mono">+15%</td><td class="mono">+2st</td><td class="right"><button class="btn btn-sm" data-act="已修改「急切」映射">改</button></td></tr>
+                  <tr><td>难过</td><td class="mono">-10%</td><td class="mono">-1st</td><td class="right"><button class="btn btn-sm" data-act="已修改「难过」映射">改</button></td></tr>
+                  <tr><td>坚定</td><td class="mono">+5%</td><td class="mono">0</td><td class="right"><button class="btn btn-sm" data-act="已修改「坚定」映射">改</button></td></tr>
+                  <tr><td>担忧</td><td class="mono">-5%</td><td class="mono">-1st</td><td class="right"><button class="btn btn-sm" data-act="已修改「担忧」映射">改</button></td></tr>
+                </tbody>
+              </table>
+              <p class="hint">由引擎能力探测自动降级；本地离线引擎不支持精确音高时仅保留语速。</p>
+            </div>
+            <div class="panel">
+              <div class="card-h"><h3>角色操作</h3></div>
+              <div class="col gap-2">
+                <button class="btn btn-sm" data-act="已合并「老陈」→「老船长」">合并角色</button>
+                <button class="btn btn-sm" data-act="已拆分「张三」为「张三 / 张衡」">拆分角色</button>
+                <button class="btn btn-sm" data-act="已降为群杂（不绑音色）">降为龙套</button>
+                <button class="btn btn-sm btn-danger" data-act-type="err" data-act="角色已删除，相关片段改判旁白">删除角色</button>
+              </div>
+              <p class="hint">角色词典复用：解析块内同名角色不会重复新建；合并/拆分后自动重算片段归属。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 6. 关系图（可编辑） ============ -->
+      <section class="section anchor" id="graph">
+        <div class="sec-head">
+          <div>
+            <h2>人物关系图</h2>
+            <div class="desc">节点 = 角色，连线 = 关系（粗细=强度，虚线=人工待确认）。点节点看画像，改关系即时留痕。</div>
+          </div>
+          <button class="btn btn-sm sec-fold" data-act="已导出关系网络（JSON + GraphML）">导出图谱</button>
+        </div>
+
+        <div class="graph-card">
+          <!-- SVG 网络图（由页面脚本按数据渲染） -->
+          <div class="graph-stage">
+            <svg id="graphMain" viewBox="0 0 760 420"></svg>
+            <div class="graph-legend">
+              <span class="gl"><i style="background:#38bdf8"></i>旁白叙述</span>
+              <span class="gl"><i style="background:#a78bfa"></i>亲属 / 强绑定</span>
+              <span class="gl"><i style="background:#34d399"></i>同僚 / 中</span>
+              <span class="gl"><i style="background:#fbbf24"></i>待确认（人工定夺）</span>
+              <span class="gl"><i style="background:#fff;opacity:.35"></i>线宽 = 强度</span>
+            </div>
+          </div>
+
+          <!-- 关系详情 / 编辑面板 -->
+          <div class="graph-panel">
+            <div class="row between">
+              <div>
+                <div class="row gap-3">
+                  <div class="avatar gp-avatar" style="background:#6366f1">张</div>
+                  <div>
+                    <div class="gp-title gp-name">张三</div>
+                    <div class="gp-sub">对话 23 段 · 主角 · 中心度 0.94</div>
+                  </div>
+                </div>
+              </div>
+              <button class="icon-btn" data-act="已收起详情面板" title="收起"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            </div>
+            <!-- 角色画像（可改） -->
+            <div class="mt">
+              <div class="label">角色画像（可人工覆盖）</div>
+              <div class="row gap-2 mt-2 wrap">
+                <span class="chip">男</span><span class="chip">坚毅</span><span class="chip">急切</span>
+                <span class="chip add" onclick="SB.toast('已新增画像标签')">+ 标签</span>
+              </div>
+            </div>
+            <div class="grid cols-2 gap-3 mt">
+              <div class="field" style="margin:0"><label class="label">年龄层</label><select class="select" data-act="年龄层已改"><option>青年</option><option>中年</option><option>老年</option></select></div>
+              <div class="field" style="margin:0"><label class="label">音色适配</label><select class="select" data-act="音色适配已改"><option>男声 · 低沉</option><option>男声 · 清朗</option><option>女声 · 冷冽</option></select></div>
+            </div>
+            <!-- 关系列表（可编辑） -->
+            <div class="label mt">关系（3）</div>
+            <div data-rel-panel="张">
+              <div class="rel-item">
+                <span class="avatar" style="width:24px;height:24px;border-radius:7px;background:#22d3ee;font-size:10px">李</span>
+                <div class="rt"><b>李四 · 妻子</b><span>强度 0.9 · 共 41 段对手戏</span></div>
+                <select class="select" style="width:100px;padding:5px 8px;font-size:12px" data-act="关系类型已改为「妻子」"><option>妻子</option><option>恋人</option><option>兄妹</option><option>同伙</option></select>
+                <button class="icon-btn danger" data-act-type="err" data-act="关系已删除（李四 ↔ 张三）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+              </div>
+              <div class="rel-item">
+                <span class="avatar" style="width:24px;height:24px;border-radius:7px;background:#fbbf24;font-size:10px">船</span>
+                <div class="rt"><b>老船长 · 父亲</b><span>强度 0.8 · 共 12 段</span></div>
+                <select class="select" style="width:100px;padding:5px 8px;font-size:12px" data-act="关系类型已改为「父亲」"><option>父亲</option><option>师父</option><option>债主</option></select>
+                <button class="icon-btn danger" data-act-type="err" data-act="关系已删除（老船长 ↔ 张三）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+              </div>
+              <div class="rel-item" style="border-color:rgba(251,191,36,.35)">
+                <span class="avatar" style="width:24px;height:24px;border-radius:7px;background:#fb7185;font-size:10px">林</span>
+                <div class="rt"><b>林晚 · 同事</b><span>强度 0.55 · 待确认</span></div>
+                <select class="select" style="width:100px;padding:5px 8px;font-size:12px" data-act="关系类型已改为「旧识」"><option>同事</option><option>旧识</option><option>对手</option></select>
+                <button class="icon-btn" data-act="已确认关系（同事）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></button>
+              </div>
+            </div>
+            <div class="row gap-2 mt">
+              <button class="btn btn-sm" data-act="已新增关系（张三 → 林晚 · 旧识）">＋ 新增关系</button>
+              <button class="btn btn-sm btn-ghost" data-act="已恢复为解析推荐的关系图">↺ 恢复自动</button>
+              <button class="btn btn-sm sec-fold" data-rel-goto="#chapters">在章节中定位</button>
+            </div>
+            <hr class="divider" />
+            <button class="btn btn-block btn-sm" data-act="已按当前图谱重算章节权重">按图谱重算剧情权重</button>
+          </div>
+        </div>
+        <p class="hint">关系抽取为 M2 能力，此处为设计预览；人工确认过的边标记为实线，参与后续「重点角色优先分配音色」的推荐排序。</p>
+      </section>
+
+      <!-- ============ 7. 已解析章节内容（三栏校对台） ============ -->
+      <section class="section anchor" id="chapters">
+        <div class="sec-head">
+          <div>
+            <h2>已解析章节内容</h2>
+            <div class="desc">左章节树 · 中片段列表 · 右片段属性；每段都可试听、改说话人、改情绪、改文本。</div>
+          </div>
+          <div class="row gap-2 sec-fold">
+            <button class="btn btn-sm" data-act="剧本已导出为 TXT">导出剧本</button>
+            <button class="btn btn-sm" data-act="已重新解析（任务队列）">↻ 重新解析本章</button>
+          </div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:250px 1fr 268px;align-items:start">
+          <!-- 7.1 章节树 -->
+          <div class="panel">
+            <div class="card-h"><h3>章节</h3><span class="sub">8 章</span></div>
+            <div class="chap-tree">
+              <div class="chap-node active" onclick="SB.toast('已切换到：第 1 章 启航')"><span class="cdot"></span><span class="cn">Ch.1</span><span class="ct">启航</span><span class="cd">12 段</span></div>
+              <div class="chap-node done" onclick="SB.toast('已切换到：第 2 章 灯塔')"><span class="cdot"></span><span class="cn">Ch.2</span><span class="ct">灯塔</span><span class="cd">16 段</span></div>
+              <div class="chap-node unread" onclick="SB.toast('已切换到：第 3 章 风暴')"><span class="cdot"></span><span class="cn">Ch.3</span><span class="ct">风暴</span><span class="cd">18 段</span></div>
+              <div class="chap-node" onclick="SB.toast('已切换到：第 4 章 登陆')"><span class="cdot"></span><span class="cn">Ch.4</span><span class="ct">登陆</span><span class="cd">15 段</span></div>
+              <div class="chap-node" onclick="SB.toast('已切换到：第 5 章 暗礁')"><span class="cdot"></span><span class="cn">Ch.5</span><span class="ct">暗礁</span><span class="cd">14 段</span></div>
+              <div class="chap-node" onclick="SB.toast('已切换到：第 6 章 信标')"><span class="cdot"></span><span class="cn">Ch.6</span><span class="ct">信标</span><span class="cd">17 段</span></div>
+              <div class="chap-node" onclick="SB.toast('已切换到：第 7 章 归途')"><span class="cdot"></span><span class="cn">Ch.7</span><span class="ct">归途</span><span class="cd">20 段</span></div>
+              <div class="chap-node empty" onclick="SB.toast('第 8 章尚未解析')"><span class="cdot"></span><span class="cn">Ch.8</span><span class="ct">— 未解析 —</span><span class="cd">—</span></div>
+            </div>
+            <hr class="divider" />
+            <div class="row between tiny muted"><span>已校对</span><span style="color:var(--ok)">8 / 8 章</span></div>
+            <div class="row between tiny muted mt-2"><span>人工修改</span><span style="color:var(--warn)">17 处</span></div>
+            <div class="row between tiny muted mt-2"><span>待复核</span><span style="color:var(--danger)">2 条</span></div>
+          </div>
+
+          <!-- 7.2 片段列表 -->
+          <div class="panel" style="padding:0;overflow:hidden">
+            <div class="card-h" style="padding:18px 20px 0"><h3>第 1 章 · 启航</h3><span class="sub">12 段 · 已显示 <span data-seg-count>0 / 0</span></span></div>
+            <!-- 筛选工具条：类型分段 + 说话人 + 情绪 + 快捷开关 -->
+            <div class="row between wrap gap-3" style="padding:12px 20px">
+              <div class="segmented" data-seg="ftype" style="padding:3px">
+                <button class="active" data-val="all">全部</button>
+                <button data-val="dialogue">对话</button>
+                <button data-val="narration">叙述</button>
+                <button data-val="psych">心理</button>
+              </div>
+              <div class="row gap-2">
+                <select class="select" style="width:130px" data-spk-filter><option value="">全部说话人</option><option value="张三">张三</option><option value="李四">李四</option><option value="旁白">旁白</option></select>
+                <select class="select" style="width:118px" data-emo-filter><option value="">全部情绪</option><option value="平静">平静</option><option value="急切">急切</option><option value="难过">难过</option><option value="坚定">坚定</option></select>
+                <button class="switch" data-only="low" title="仅看低置信"></button>
+                <span class="tiny muted">低置信</span>
+                <button class="switch" data-only="edited" title="仅看人工改过"></button>
+                <span class="tiny muted">仅人工改</span>
+              </div>
+            </div>
+
+            <div data-seg-list>
+              <div class="seg" data-type="narration" data-spk="" data-emo="平静">
+                <div class="sg-no">01</div>
+                <div>
+                  <div class="sg-body"><div class="sg-text">夜色像一块浸了水的绒布，沉沉压在港口上。</div>
+                  <div class="sg-acts">
+                    <button class="btn btn-sm btn-ghost" data-seg-act="试听第 01 段">▶ 试听</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="已进入文本编辑（演示）">✎ 改文本</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="已切为「旁白 · 中性·沉稳」">改说话人</button>
+                    <span class="badge"><span class="dot"></span>平静</span>
+                  </div></div></div>
+                <div class="sg-meta">
+                  <div class="ln"><span class="k">说话人</span><span class="v">旁白</span></div>
+                  <div class="ln"><span class="k">时长</span><span class="v">00:04</span></div>
+                  <div class="ln"><span class="k">置信</span><span class="v">0.97</span></div>
+                </div>
+                <div class="sg-dur">第 1 / 12</div>
+              </div>
+
+              <div class="seg edited" data-type="dialogue" data-spk="张三" data-emo="急切">
+                <div class="sg-no">02</div>
+                <div>
+                  <div class="sg-body"><div class="sg-text"><span class="spk" data-seg-spk>张三：</span>"今天必须出发，不能再等了。"</div>
+                  <div class="sg-acts">
+                    <button class="btn btn-sm btn-ghost" data-seg-act="试听第 02 段">▶ 试听</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="已进入文本编辑（演示）">✎ 改文本</button>
+                    <span class="badge warn"><span class="dot"></span>急切 · 0.7</span>
+                    <span class="badge" style="color:var(--warn);border-color:rgba(251,191,36,.35)"><span class="adj-dot"></span>人工改过</span>
+                  </div></div></div>
+                <div class="sg-meta">
+                  <div class="ln"><span class="k">说话人</span><span class="v">张三</span></div>
+                  <div class="ln"><span class="k">时长</span><span class="v">00:03</span></div>
+                  <div class="ln"><span class="k">韵律</span><span class="v">×1.15 +2st</span></div>
+                </div>
+                <div class="sg-dur">第 2 / 12</div>
+              </div>
+
+              <div class="seg lowconf" data-type="dialogue" data-spk="李四" data-emo="担忧">
+                <div class="sg-no">03</div>
+                <div>
+                  <div class="sg-body"><div class="sg-text"><span class="spk" data-seg-spk>李四：</span>"风浪太大了，再等等吧……"</div>
+                  <div class="sg-acts">
+                    <button class="btn btn-sm btn-ghost" data-seg-act="试听第 03 段">▶ 试听</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="说话人已改成「李四」">✓ 确认说话人</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="已改判为「旁白」">改判</button>
+                    <span class="badge info"><span class="dot"></span>担忧 · 0.5</span>
+                    <span class="badge" style="color:var(--danger);border-color:rgba(251,113,133,.35)">低置信 0.54</span>
+                  </div></div></div>
+                <div class="sg-meta">
+                  <div class="ln"><span class="k">说话人</span><span class="v">李四</span></div>
+                  <div class="ln"><span class="k">时长</span><span class="v">00:04</span></div>
+                  <div class="ln"><span class="k">依据</span><span class="v">「吧」+ 尾降调</span></div>
+                </div>
+                <div class="sg-dur">第 3 / 12</div>
+              </div>
+
+              <div class="seg" data-type="psych" data-spk="张三" data-emo="难过">
+                <div class="sg-no">04</div>
+                <div>
+                  <div class="sg-body"><div class="sg-text">张三望着远处灯塔明明灭灭的光，心中一阵难过——他知道，等下去就再没有机会了。</div>
+                  <div class="sg-acts">
+                    <button class="btn btn-sm btn-ghost" data-seg-act="试听第 04 段">▶ 试听</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="情绪强度已改为 0.72">改情绪强度</button>
+                    <span class="badge warn"><span class="dot"></span>难过 · 0.6</span>
+                    <span class="badge">心理描写</span>
+                  </div></div></div>
+                <div class="sg-meta">
+                  <div class="ln"><span class="k">归属</span><span class="v">旁白播报</span></div>
+                  <div class="ln"><span class="k">时长</span><span class="v">00:07</span></div>
+                  <div class="ln"><span class="k">韵律</span><span class="v">×0.9 -1st</span></div>
+                </div>
+                <div class="sg-dur">第 4 / 12</div>
+              </div>
+
+              <div class="seg edited" data-type="dialogue" data-spk="张三" data-emo="坚定">
+                <div class="sg-no">05</div>
+                <div>
+                  <div class="sg-body"><div class="sg-text"><span class="spk" data-seg-spk>张三：</span>"我们走吧。"</div>
+                  <div class="sg-acts">
+                    <button class="btn btn-sm btn-ghost" data-seg-act="试听第 05 段">▶ 试听</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="说话人已改判为「张三」">✓ 确认说话人</button>
+                    <span class="badge"><span class="dot"></span>坚定 · 0.4</span>
+                    <span class="badge" style="color:var(--warn);border-color:rgba(251,191,36,.35)"><span class="adj-dot"></span>人工改过</span>
+                  </div></div></div>
+                <div class="sg-meta">
+                  <div class="ln"><span class="k">说话人</span><span class="v">张三</span></div>
+                  <div class="ln"><span class="k">时长</span><span class="v">00:02</span></div>
+                  <div class="ln"><span class="k">原判</span><span class="v">旁白（已改）</span></div>
+                </div>
+                <div class="sg-dur">第 5 / 12</div>
+              </div>
+
+              <div class="seg" data-type="narration" data-spk="" data-emo="平静">
+                <div class="sg-no">06</div>
+                <div>
+                  <div class="sg-body"><div class="sg-text">缆绳绷紧的声音里，船头朝着黑沉沉的海面劈了下去。</div>
+                  <div class="sg-acts">
+                    <button class="btn btn-sm btn-ghost" data-seg-act="试听第 06 段">▶ 试听</button>
+                    <button class="btn btn-sm btn-ghost" data-seg-act="已进入文本编辑（演示）">✎ 改文本</button>
+                    <span class="badge"><span class="dot"></span>平静</span>
+                  </div></div></div>
+                <div class="sg-meta">
+                  <div class="ln"><span class="k">说话人</span><span class="v">旁白</span></div>
+                  <div class="ln"><span class="k">时长</span><span class="v">00:05</span></div>
+                  <div class="ln"><span class="k">BGM</span><span class="v">低频海浪</span></div>
+                </div>
+                <div class="sg-dur">第 6 / 12</div>
+              </div>
+            </div>
+            <!-- 空态：被筛掉时提示 -->
+            <div class="empty hide" data-seg-empty>
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+              <b style="color:var(--text-1)">没有符合条件的片段</b>
+              <p class="tiny mt-2">试着放宽说话人 / 情绪筛选，或清除「低置信」「仅人工改」开关。</p>
+              <button class="btn btn-sm mt" data-act="已重置全部筛选">重置筛选</button>
+            </div>
+            <div class="row between" style="padding:14px 20px;border-top:1px solid var(--line)">
+              <span class="tiny muted">点片段空白处即可试听；橙色左边框 = 人工改过，红色 = 低置信待复核</span>
+              <div class="row gap-2">
+                <button class="btn btn-sm" data-act="已批量标记 0 段为已复核">批量复核</button>
+                <button class="btn btn-primary btn-sm" data-act="第 1 章校对已保存 · 提交合成">本章校对完成，提交合成</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7.3 片段属性 / 试听 -->
+          <div class="col gap-4">
+            <div class="panel">
+              <div class="card-h"><h3>当前片段</h3><span class="sub">#03</span></div>
+              <div class="player mt-2">
+                <button class="play" data-play="第 1 章 · 03「风浪太大了…」" data-play-sub="00:00 / 00:04"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+                <div class="wave" id="wseg"></div>
+                <div class="time">00:00 / 00:04</div>
+              </div>
+              <div class="field mt"><label class="label">说话人</label><select class="select" data-act="片段说话人已改"><option>李四</option><option>张三</option><option>旁白</option></select></div>
+              <div class="field"><label class="label">情绪</label><select class="select" data-act="片段情绪已改"><option>担忧 · 0.5</option><option>急切 · 0.7</option><option>坚定 · 0.4</option></select></div>
+              <div class="param-row"><span class="pname">语速</span><input type="range" class="slider" min="0.5" max="2" step="0.1" value="0.94" /><span class="pval"></span></div>
+              <div class="param-row"><span class="pname">音高</span><input type="range" class="slider" min="-12" max="12" step="1" value="-1" data-unit="st" /><span class="pval"></span></div>
+              <div class="row between mt">
+                <span class="sm dim">片段级覆盖角色参数</span>
+                <button class="switch on" data-switch></button>
+              </div>
+              <div class="row gap-2 mt">
+                <button class="btn btn-sm" data-act="该片段已加入重合成队列">重合成此段</button>
+                <button class="btn btn-sm btn-ghost" data-act-type="err" data-act="片段已删除（第 1 章）">删除</button>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="card-h"><h3>本章情绪分布</h3></div>
+              <div class="col gap-2">
+                <div class="row between tiny"><span>平静</span><span class="mono muted">5 段</span><span class="conf-bar" style="width:80px"><i style="width:100%"></i></span></div>
+                <div class="row between tiny"><span>急切</span><span class="mono muted">3 段</span><span class="conf-bar" style="width:80px"><i style="width:60%"></i></span></div>
+                <div class="row between tiny"><span>难过</span><span class="mono muted">2 段</span><span class="conf-bar" style="width:80px"><i style="width:40%"></i></span></div>
+                <div class="row between tiny"><span>坚定</span><span class="mono muted">1 段</span><span class="conf-bar" style="width:80px"><i style="width:20%"></i></span></div>
+                <div class="row between tiny"><span>担忧</span><span class="mono muted">1 段</span><span class="conf-bar" style="width:80px"><i style="width:20%"></i></span></div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="card-h"><h3>待复核队列</h3><span class="sub">全书 2 条</span></div>
+              <div class="col gap-2">
+                <div class="card" style="border-color:rgba(251,113,133,.3)">
+                  <div class="tiny">第 1 章 · #03</div>
+                  <p class="sm mt-2">「风浪太大了，再等等吧……」</p>
+                  <div class="row mt-2"><span class="badge warn"><span class="dot"></span>疑似 李四 · 0.54</span><button class="btn btn-sm right" data-act="已确认：李四">确认</button></div>
+                </div>
+                <div class="card" style="border-color:rgba(251,113,133,.3)">
+                  <div class="tiny">第 1 章 · #05</div>
+                  <p class="sm mt-2">「我们走吧。」</p>
+                  <div class="row mt-2"><span class="badge warn"><span class="dot"></span>疑似 旁白 · 0.58</span><button class="btn btn-sm right" data-act="已确认：张三">确认</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 8. 已制作配音（音频资产） ============ -->
+      <section class="section anchor" id="audio">
+        <div class="sec-head">
+          <div>
+            <h2>已制作配音</h2>
+            <div class="desc">全书合成产出：样章、分章、分角色轨；支持下载、单独重合成与替换。</div>
+          </div>
+          <div class="row gap-2 sec-fold">
+            <span class="badge info"><span class="dot"></span>合成中 Ch.3 72%</span>
+            <button class="btn btn-sm btn-primary" data-act="全本合成任务已启动">开始 / 继续全本合成</button>
+          </div>
+        </div>
+
+        <!-- 成品播放器（双色分角色波形） -->
+        <div class="panel mb">
+          <div class="card-h"><h3>样章成品试听</h3><span class="badge ok"><span class="dot"></span>合成完成</span><span class="sub right">128 kbps · 44.1kHz · 3.7MB · 03:42</span></div>
+          <div class="final-player mt-2">
+            <div class="fp-top">
+              <button class="play" style="width:44px;height:44px;border-radius:99px;background:var(--grad);border:none;cursor:pointer;display:grid;place-items:center;color:#051018;flex:none;box-shadow:var(--glow-soft)" data-play="星河彼端 · 样章（前 2 章）" data-play-sub="00:00 / 07:18"><svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M8 5v14l11-7z"/></svg></button>
+              <div class="fp-lanes" style="flex:1">
+                <div class="fp-lane narr">
+                  <span class="flname">旁白</span>
+                  <span class="flbars" id="laneNarr"></span>
+                </div>
+                <div class="fp-lane voice">
+                  <span class="flname">张三 / 李四</span>
+                  <span class="flbars" id="laneVoice"></span>
+                </div>
+              </div>
+            </div>
+            <div class="fp-time"><span>00:00</span><span>01:48</span><span>03:42</span></div>
+            <div class="row gap-2 mt">
+              <button class="btn btn-sm" data-act="sample_ch12.mp3 已下载">下载</button>
+              <button class="btn btn-sm" data-act="分享链接已复制">分享</button>
+              <button class="btn btn-sm" data-act="已生成字幕 srt/lrc">字幕文件</button>
+              <button class="btn btn-sm btn-ghost" data-act="已用新引擎重合成（演示）">重新合成</button>
+              <span class="tiny muted right">上一版生成于 10-02 14:58 · 版本 v4</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 音频资产表 -->
+        <div class="panel mb" style="padding:0;overflow:hidden">
+          <div class="card-h" style="padding:18px 20px 0"><h3>音频资产</h3><span class="sub">7 条</span></div>
+          <div style="padding:14px 20px">
+            <div class="asset-row head"><span>名称</span><span>时长</span><span>大小</span><span>格式</span><span>生成时间</span><span class="right">操作</span></div>
+            <div class="asset-row">
+              <span class="an">样章（前 2 章）<span>sample_ch12.mp3 · 含封面</span></span>
+              <span class="mono tiny">07:18</span><span class="mono tiny">7.4MB</span><span class="tag">MP3 128k</span><span class="tiny muted">10-02 14:58</span>
+              <span class="right row gap-2">
+                <button class="btn btn-sm btn-ghost" data-play="样章（前 2 章）" data-play-sub="07:18">▶</button>
+                <button class="btn btn-sm" data-act="已下载 sample_ch12.mp3">下载</button>
+                <button class="btn btn-sm btn-ghost" data-act="已提交重合成（样章）">↻</button>
+              </span>
+            </div>
+            <div class="asset-row">
+              <span class="an">第 1 章 启航<span>ch01.mp3 · 已人工校对并入</span></span>
+              <span class="mono tiny">03:42</span><span class="mono tiny">3.7MB</span><span class="tag">MP3 128k</span><span class="tiny muted">10-02 15:04</span>
+              <span class="right row gap-2">
+                <button class="btn btn-sm btn-ghost" data-play="第 1 章 启航" data-play-sub="03:42">▶</button>
+                <button class="btn btn-sm" data-act="已下载 ch01.mp3">下载</button>
+                <button class="btn btn-sm btn-ghost" data-act="已提交重合成（第 1 章）">↻</button>
+              </span>
+            </div>
+            <div class="asset-row">
+              <span class="an">第 2 章 灯塔<span>ch02.mp3</span></span>
+              <span class="mono tiny">05:11</span><span class="mono tiny">5.1MB</span><span class="tag">MP3 128k</span><span class="tiny muted">10-02 15:04</span>
+              <span class="right row gap-2">
+                <button class="btn btn-sm btn-ghost" data-play="第 2 章 灯塔" data-play-sub="05:11">▶</button>
+                <button class="btn btn-sm" data-act="已下载 ch02.mp3">下载</button>
+                <button class="btn btn-sm btn-ghost" data-act="已提交重合成（第 2 章）">↻</button>
+              </span>
+            </div>
+            <div class="asset-row" style="border-color:rgba(56,189,248,.35);background:var(--accent-soft)">
+              <span class="an">第 3 章 风暴<span>ch03.mp3 · 合成中 72%</span></span>
+              <span class="mono tiny">—</span><span class="mono tiny">—</span><span class="tag">合成中</span><span class="tiny muted">进行中</span>
+              <span class="right row gap-2">
+                <span class="progress thin" style="width:90px"><i style="width:72%"></i></span>
+                <button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已提升该章优先级">▲</button>
+                <button class="btn btn-sm btn-ghost" data-act="已取消该章合成">取消</button>
+              </span>
+            </div>
+            <div class="asset-row" style="opacity:.6">
+              <span class="an">第 4-8 章<span>排队中 · 5 章</span></span>
+              <span class="mono tiny">—</span><span class="mono tiny">—</span><span class="badge"><span class="dot"></span>排队</span><span class="tiny muted">预计 18 分钟后</span>
+              <span class="right row gap-2"><button class="btn btn-sm btn-ghost" data-act="已提升剩余章节优先级">▲ 全部提速</button></span>
+            </div>
+            <div class="asset-row">
+              <span class="an">张三 角色轨<span>voice_zhang.mp3 · 23 段</span></span>
+              <span class="mono tiny">04:12</span><span class="mono tiny">4.1MB</span><span class="tag">MP3 128k</span><span class="tiny muted">10-02 14:56</span>
+              <span class="right row gap-2">
+                <button class="btn btn-sm btn-ghost" data-play="张三 角色轨" data-play-sub="04:12">▶</button>
+                <button class="btn btn-sm" data-act="已导出张三角色轨">单独导出</button>
+              </span>
+            </div>
+            <div class="asset-row">
+              <span class="an">李四 角色轨<span>voice_li.mp3 · 19 段</span></span>
+              <span class="mono tiny">03:38</span><span class="mono tiny">3.5MB</span><span class="tag">MP3 128k</span><span class="tiny muted">10-02 14:56</span>
+              <span class="right row gap-2">
+                <button class="btn btn-sm btn-ghost" data-play="李四 角色轨" data-play-sub="03:38">▶</button>
+                <button class="btn btn-sm" data-act="已导出李四角色轨">单独导出</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 重合成面板 -->
+        <div class="grid" style="grid-template-columns:1fr 1fr;align-items:start">
+          <div class="panel">
+            <div class="card-h"><h3>重新合成范围</h3><span class="sub">只重算受影响部分</span></div>
+            <div class="segmented" data-seg="rs">
+              <button class="active" data-seg-panel="rs" data-val="affected">仅重算受影响片段</button>
+              <button data-seg-panel="rs" data-val="chapter">整章重合成</button>
+              <button data-seg-panel="rs" data-val="full">全本重合成</button>
+            </div>
+            <p class="hint" id="rsHint">按当前改动估算：影响 6 段 / 约 32 秒音频 / 预计 40 秒。</p>
+            <hr class="divider" />
+            <div class="grid cols-2 gap-4">
+              <div class="field"><label class="label">TTS 引擎</label><select class="select"><option>本地 · IndexTTS（POC 占位）</option><option>本地 · Qwen3-TTS</option></select></div>
+              <div class="field"><label class="label">并发</label><select class="select"><option>2（省显存）</option><option selected>4</option><option>8</option></select></div>
+              <div class="field"><label class="label">输出格式</label><select class="select"><option>MP3 128 kbps</option><option>WAV 44.1kHz</option><option>MP3 192 kbps</option></select></div>
+              <div class="field"><label class="label">后处理</label><select class="select"><option>降噪 + 归一化</option><option>仅归一化</option><option>原样输出</option></select></div>
+            </div>
+            <div class="row between">
+              <span class="tiny muted">引擎能力探测失败将自动降级，不阻塞任务</span>
+              <button class="btn btn-primary" data-act="重合成任务已入队（仅受影响片段）">提交重合成</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="card-h"><h3>实时合成进度（SSE）</h3><span class="sub">task_id synth_9f21</span></div>
+            <div class="progress"><i style="width:72%"></i></div>
+            <div class="row between mt-2"><span class="sm">正在合成 第3章 · 第 7/18 段（老船长 · 沙哑）</span><span class="mono tiny muted">72%</span></div>
+            <hr class="divider" />
+            <table class="table">
+              <thead><tr><th>任务</th><th>状态</th><th>耗时</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>全本合成 v4</td><td><span class="badge info"><span class="dot"></span>进行中</span></td><td class="mono">3m12s</td><td class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="任务已取消">取消</button></td></tr>
+                <tr><td>全本合成 v3</td><td><span class="badge ok"><span class="dot"></span>成功</span></td><td class="mono">4m40s</td><td class="right"><button class="btn btn-sm btn-ghost" data-act="已回滚到 v3">回滚</button></td></tr>
+                <tr><td>样本预处理</td><td><span class="badge ok"><span class="dot"></span>成功</span></td><td class="mono">1m02s</td><td class="right"><span class="tiny muted">—</span></td></tr>
+                <tr><td>样章合成</td><td><span class="badge ok"><span class="dot"></span>成功</span></td><td class="mono">42s</td><td class="right"><span class="tiny muted">—</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 9. 人工修改留痕与版本快照 ============ -->
+      <section class="section anchor" id="audit">
+        <div class="sec-head">
+          <div>
+            <h2>人工修改留痕</h2>
+            <div class="desc">所有人工介入（改文本 / 改说话人 / 改情绪 / 合并角色 / 改绑定）全程留痕，可按版本回滚。</div>
+          </div>
+          <button class="btn btn-sm sec-fold" data-act="修改日志已导出 CSV">导出日志</button>
+        </div>
+        <div class="row gap-2 mb wrap">
+          <span class="snap cur"><span class="sn-dot"></span>当前 v5 · 10-02 15:06</span>
+          <span class="snap"><span class="sn-dot"></span>v4 · 10-02 14:58</span>
+          <span class="snap"><span class="sn-dot"></span>v3 · 10-02 14:30</span>
+          <span class="snap"><span class="sn-dot"></span>v2 · 10-01 21:22</span>
+          <span class="snap"><span class="sn-dot"></span>自动解析 v1 · 10-01 21:14</span>
+          <span class="right tiny muted">回滚仅影响未导出的制作状态，已导出成品保留</span>
+        </div>
+        <div class="panel" style="padding:0;overflow:hidden">
+          <div class="log-row head"><span>时间</span><span>类型</span><span>变更内容</span><span>操作</span><span class="right">操作</span></div>
+          <div class="log-row">
+            <span class="lt">10-02 15:06</span>
+            <span><span class="badge warn"><span class="dot"></span>改说话人</span></span>
+            <span class="lo">第 1 章 #03「风浪太大了，再等等吧……」</span>
+            <span class="ldiff">自动判 旁白 → <ins>李四</ins>（置信 0.54 → 人工确认）</span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已回滚该处修改">回滚</button></span>
+          </div>
+          <div class="log-row">
+            <span class="lt">10-02 15:02</span>
+            <span><span class="badge"><span class="dot"></span>改绑定</span></span>
+            <span class="lo">老船长 → 克隆音色「老陈」</span>
+            <span class="ldiff"><del>男声 · 老年·沙哑</del> → <ins>克隆 · 老陈</ins></span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已回滚该处修改">回滚</button></span>
+          </div>
+          <div class="log-row">
+            <span class="lt">10-02 15:00</span>
+            <span><span class="badge info"><span class="dot"></span>改情绪</span></span>
+            <span class="lo">第 1 章 #02「今天必须出发」</span>
+            <span class="ldiff">急切 0.70 → <ins>急切 0.75</ins>（语速 ×1.15）</span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已回滚该处修改">回滚</button></span>
+          </div>
+          <div class="log-row">
+            <span class="lt">10-02 14:58</span>
+            <span><span class="badge acc"><span class="dot"></span>改文本</span></span>
+            <span class="lo">第 1 章 #05</span>
+            <span class="ldiff">「我们走吧。」→ <ins>「走吧 —— 现在。」</ins></span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已回滚该处修改">回滚</button></span>
+          </div>
+          <div class="log-row">
+            <span class="lt">10-02 14:46</span>
+            <span><span class="badge"><span class="dot"></span>合并角色</span></span>
+            <span class="lo">张衡 → 张三</span>
+            <span class="ldiff">合并 7 段台词，<ins>角色数 4 → 4</ins>（旁白合并）</span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已回滚该处修改">回滚</button></span>
+          </div>
+          <div class="log-row">
+            <span class="lt">10-02 14:20</span>
+            <span><span class="badge"><span class="dot"></span>关系编辑</span></span>
+            <span class="lo">张三 ↔ 林晚</span>
+            <span class="ldiff">新增关系「同事 · 0.55」<ins>（待确认）</ins></span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act-type="err" data-act="已回滚该处修改">回滚</button></span>
+          </div>
+          <div class="log-row">
+            <span class="lt">10-02 14:10</span>
+            <span><span class="badge warn"><span class="dot"></span>重跑解析</span></span>
+            <span class="lo">第 1-2 章</span>
+            <span class="ldiff">按「LLM 增强」重跑，<del>18 段</del> → <ins>28 段</ins></span>
+            <span class="right"><button class="btn btn-sm btn-ghost" data-act="已恢复解析前快照 v1">恢复 v1</button></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 10. 导出成品 ============ -->
+      <section class="section anchor" id="export">
+        <div class="sec-head">
+          <div>
+            <h2>导出成品</h2>
+            <div class="desc">全部合成完成即可导出；当前预计产物 3 个文件、约 218MB。</div>
+          </div>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr 1fr;align-items:start">
+          <div class="panel">
+            <div class="card-h"><h3>导出配置</h3><span class="sub">会记住为默认</span></div>
+            <div class="grid cols-2 gap-4">
+              <div class="field"><label class="label">音频格式</label><select class="select"><option>MP3 128 kbps</option><option>MP3 192 kbps</option><option>WAV 44.1kHz</option><option>M4B（有声书）</option></select></div>
+              <div class="field"><label class="label">分片方式</label><select class="select"><option>整本单文件</option><option>按章节</option><option>每 20 分钟</option></select></div>
+              <div class="field"><label class="label">字幕</label><select class="select"><option>SRT + LRC</option><option>仅 SRT</option><option>不导出</option></select></div>
+              <div class="field"><label class="label">片头片尾</label><select class="select"><option>无</option><option>片头 3s + 片尾 2s</option><option>仅片尾</option></select></div>
+            </div>
+            <div class="col gap-3 mt">
+              <div class="row between"><span class="sm dim">背景音乐（低音量垫底）</span><button class="switch" data-switch></button></div>
+              <div class="row between"><span class="sm dim">输出时做响度归一（LUFS -16）</span><button class="switch on" data-switch></button></div>
+              <div class="row between"><span class="sm dim">导出后写入隐式水印（仅自身内容）</span><button class="switch on" data-switch></button></div>
+            </div>
+            <hr class="divider" />
+            <div class="row between">
+              <span class="tiny muted">预计 218MB · 7 个音频 + 2 个字幕</span>
+              <button class="btn btn-primary" data-act="导出任务已创建（演示）">生成导出任务</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="card-h"><h3>导出记录</h3><span class="sub">历史 4 次</span></div>
+            <table class="table">
+              <thead><tr><th>时间</th><th>内容</th><th>文件</th><th>状态</th><th></th></tr></thead>
+              <tbody>
+                <tr><td class="mono">10-01 22:03</td><td>样章样音</td><td class="mono">1</td><td><span class="badge ok"><span class="dot"></span>已下载</span></td><td class="right"><button class="btn btn-sm" data-act="已重新下载">下载</button></td></tr>
+                <tr><td class="mono">10-01 21:40</td><td>第 1 章 试听版</td><td class="mono">3</td><td><span class="badge ok"><span class="dot"></span>已下载</span></td><td class="right"><button class="btn btn-sm" data-act="已重新下载">下载</button></td></tr>
+                <tr><td class="mono">10-01 21:20</td><td>解析报告（JSON）</td><td class="mono">1</td><td><span class="badge ok"><span class="dot"></span>已下载</span></td><td class="right"><button class="btn btn-sm" data-act="已重新下载">下载</button></td></tr>
+                <tr><td class="mono">—</td><td>全本成品</td><td class="mono">—</td><td><span class="badge warn"><span class="dot"></span>待合成完成</span></td><td class="right"><span class="tiny muted">剩余 6 章</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <p class="hint mt-8">交互说明：顶部流水线与子导航可跳转各区块；角色卡点选联动关系图详情；关系图节点/连线可点选与高亮；点击任意片段即可用右下角常驻播放器试听；橙色左边框为人工修改、红色为低置信待复核；所有改动均记入「人工修改留痕」。</p>
+    </div>
+  </main>
+</div>
+
+<!-- ============ 常驻迷你播放器（右下角，全局试听） ============ -->
+<div class="mini-player hide">
+  <button class="mp-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+  <div class="mp-body">
+    <div class="mp-title">未选择音频</div>
+    <div class="mp-sub">00:00 / 00:00</div>
+    <div class="mp-wave" id="mpWave"></div>
+  </div>
+  <button class="mp-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+</div>
+
+<script>
+  /* ============================================================
+     工作空间页内脚本：波形生成 + 关系图渲染
+     纯静态演示；接入 Vue 时改为组件 computed / 数据驱动渲染
+     ============================================================ */
+
+  /* —— 波形 / 分角色轨 —— */
+  function mkWave(id, n, seed) {
+    var w = document.getElementById(id);
+    if (!w) return;
+    n = n || 70; seed = seed || 1;
+    for (var i = 0; i < n; i++) {
+      var b = document.createElement('i');
+      var h = 18 + Math.abs(Math.sin(i * 0.45 * seed + seed) * 0.8 + Math.sin(i * 0.13) * 0.2) * 70;
+      b.style.height = h + '%';
+      w.appendChild(b);
+    }
+  }
+  mkWave('wpv2', 76);
+  mkWave('wseg', 34);
+  mkWave('mpWave', 26);
+  mkWave('laneNarr', 74, 1.0);
+  mkWave('laneVoice', 74, 1.7);
+
+  /* —— 人物关系图数据 ——
+     nodes: id / 显示名 / 首字 / 颜色 / 是否旁白
+     edges: from → to / label / 关系类型 / weight(0-1) / kind(叙述·亲属·同僚·待确认) */
+  var GRAPH = {
+    nodes: [
+      { id: 'N', name: '旁白',  letter: '旁', color: '#38bdf8', center: true },
+      { id: 'Z', name: '张三',  letter: '张', color: '#6366f1' },
+      { id: 'L', name: '李四',  letter: '李', color: '#22d3ee' },
+      { id: 'C', name: '老船长', letter: '船', color: '#fbbf24' },
+      { id: 'Y', name: '林晚',  letter: '林', color: '#fb7185' }
+    ],
+    edges: [
+      { from: 'N', to: 'Z', label: '旁白叙述', kind: 'narr', weight: 0.35 },
+      { from: 'N', to: 'L', label: '旁白叙述', kind: 'narr', weight: 0.35 },
+      { from: 'N', to: 'C', label: '旁白叙述', kind: 'narr', weight: 0.35 },
+      { from: 'N', to: 'Y', label: '旁白叙述', kind: 'narr', weight: 0.35 },
+      { from: 'Z', to: 'L', label: '妻子', kind: 'kin', weight: 0.95, strong: true },
+      { from: 'Z', to: 'C', label: '父亲', kind: 'kin', weight: 0.8, strong: true },
+      { from: 'L', to: 'C', label: '母亲', kind: 'kin', weight: 0.82, strong: true },
+      { from: 'Z', to: 'Y', label: '同事', kind: 'mate', weight: 0.55, pending: true },
+      { from: 'L', to: 'Y', label: '旧识', kind: 'mate', weight: 0.5, pending: true }
+    ]
+  };
+
+  var KIND_COLOR = { narr: '#38bdf8', kin: '#a78bfa', mate: '#34d399', pending: '#fbbf24' };
+
+  /* 布局：旁白居中，其余按正五边形分布；迷你图用同一套布局按不同画布尺寸缩放 */
+  function layout(w, h) {
+    var pos = {}, i, n = GRAPH.nodes.length;
+    var cx = w / 2, cy = h / 2;
+    if (GRAPH.nodes[0].center) {
+      pos[GRAPH.nodes[0].id] = { x: cx, y: cy };
+      for (i = 1; i < n; i++) {
+        var a = -Math.PI / 2 + (i - 1) * (2 * Math.PI / (n - 1));
+        pos[GRAPH.nodes[i].id] = { x: cx + Math.cos(a) * (w * 0.33), y: cy + Math.sin(a) * (h * 0.34) };
+      }
+    } else {
+      for (i = 0; i < n; i++) {
+        var a2 = -Math.PI / 2 + i * (2 * Math.PI / n);
+        pos[GRAPH.nodes[i].id] = { x: cx + Math.cos(a2) * (w * 0.31), y: cy + Math.sin(a2) * (h * 0.33) };
+      }
+    }
+    return pos;
+  }
+
+  function renderGraph(svgId, size) {
+    var svg = document.getElementById(svgId);
+    if (!svg) return;
+    var w = +svg.getAttribute('viewBox').split(' ')[2];
+    var h = +svg.getAttribute('viewBox').split(' ')[3];
+    var pos = layout(w, h);
+    var NS = 'http://www.w3.org/2000/svg';
+    var isMini = size === 'mini';
+    var nodeR = isMini ? 17 : 30;
+
+    var gEdges = document.createElementNS(NS, 'g'); svg.appendChild(gEdges);
+    var gNodes = document.createElementNS(NS, 'g'); svg.appendChild(gNodes);
+
+    /* 连线：二次贝塞尔（轻微弯曲，避免重叠） */
+    GRAPH.edges.forEach(function (e, i) {
+      var a = pos[e.from], b = pos[e.to];
+      var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      var dx = b.x - a.x, dy = b.y - a.y;
+      var len = Math.sqrt(dx * dx + dy * dy) || 1;
+      // 法线方向偏移，形成弧度
+      var off = 0.13, qx = mx - (dy / len) * len * off, qy = my + (dx / len) * len * off;
+      var color = e.pending ? KIND_COLOR.pending : (KIND_COLOR[e.kind] || '#94a3b8');
+      var strokeW = (e.kind === 'narr' ? 1.2 : 1 + e.weight * 4);
+
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', 'M' + a.x + ' ' + a.y + ' Q' + qx + ' ' + qy + ' ' + b.x + ' ' + b.y);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', color);
+      path.setAttribute('stroke-width', strokeW);
+      path.setAttribute('stroke-opacity', e.kind === 'narr' ? 0.45 : 0.8);
+      path.setAttribute('class', 'g-edge' + (e.pending ? ' pending' : ''));
+      if (e.pending) path.setAttribute('stroke-dasharray', '6 5');
+      // 携带两端节点 id，供联动高亮（用 data-* 无法直接设在 path 上，转存到节点元素）
+      path.dataset.gedge = e.from + e.to;
+      gEdges.appendChild(path);
+
+      if (!isMini) {
+        var t = document.createElementNS(NS, 'text');
+        t.setAttribute('x', (mx + (qx - mx) * 0.55));
+        t.setAttribute('y', (my + (qy - my) * 0.55) - 5);
+        t.setAttribute('text-anchor', 'middle');
+        t.setAttribute('font-size', '11');
+        t.setAttribute('fill', color);
+        t.setAttribute('opacity', '.85');
+        t.textContent = e.label;
+        gEdges.appendChild(t);
+      }
+    });
+
+    /* 节点 */
+    GRAPH.nodes.forEach(function (n) {
+      var p = pos[n.id];
+      var g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', 'g-node');
+      g.dataset.gnode = n.id;
+
+      var halo = document.createElementNS(NS, 'circle');
+      halo.setAttribute('cx', p.x); halo.setAttribute('cy', p.y); halo.setAttribute('r', nodeR + 9);
+      halo.setAttribute('fill', 'rgba(56,189,248,0.16)');
+      halo.setAttribute('class', 'g-halo');
+      g.appendChild(halo);
+
+      var body = document.createElementNS(NS, 'circle');
+      body.setAttribute('cx', p.x); body.setAttribute('cy', p.y); body.setAttribute('r', nodeR);
+      body.setAttribute('fill', n.center ? 'rgba(56,189,248,0.22)' : n.color);
+      body.setAttribute('stroke', n.color);
+      body.setAttribute('stroke-width', '2');
+      body.setAttribute('class', 'g-body');
+      g.appendChild(body);
+
+      var letter = document.createElementNS(NS, 'text');
+      letter.setAttribute('x', p.x); letter.setAttribute('y', p.y + 5);
+      letter.setAttribute('text-anchor', 'middle');
+      letter.setAttribute('font-size', nodeR * 0.95);
+      letter.setAttribute('font-weight', '700');
+      letter.setAttribute('fill', n.center ? '#38bdf8' : '#06101f');
+      letter.textContent = n.letter;
+      g.appendChild(letter);
+
+      var label = document.createElementNS(NS, 'text');
+      label.setAttribute('x', p.x); label.setAttribute('y', p.y + nodeR + 18);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('font-size', isMini ? '10' : '12.5');
+      label.setAttribute('fill', '#c7d0e5');
+      label.setAttribute('class', 'g-label');
+      label.textContent = n.name;
+      g.appendChild(label);
+
+      // 整体先加连线（gEdges）再加节点（gNodes），保证节点压在连线上方
+      gNodes.appendChild(g);
+    });
+  }
+
+  renderGraph('graphMain', 'main');
+  renderGraph('graphMini', 'mini');
+</script>
+<script src="assets/app.js"></script>
+</body>
+</html>

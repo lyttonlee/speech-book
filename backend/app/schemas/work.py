@@ -23,12 +23,19 @@ class WorkUpdate(BaseModel):
 
 
 class WorkOut(BaseModel):
+    """作品输出模型（接口文档 §4.1/§4.3）。
+
+    `intro` 与 `cover_url` 是列表卡片与详情页都要展示的字段，
+    早期版本漏了导致前端拿不到封面，这里按文档补齐。
+    """
     id: int
     owner_id: int
     name: str
     author: str
+    intro: str = ""
     type: str
     lang: str
+    cover_url: str = ""
     status: str
     chapter_count: int = 0
     updated_at: datetime | None = None

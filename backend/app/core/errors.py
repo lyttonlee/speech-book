@@ -53,6 +53,22 @@ class Conflict(AppError):
     message = "状态冲突"
 
 
+class ComplianceFailed(AppError):
+    """克隆合规前置未通过（未实名 / 无授权书 / 声纹不符本人）。"""
+
+    code = "CLONE_COMPLIANCE_FAILED"
+    status = 422
+    message = "克隆合规前置未通过"
+
+
+class BannedPerson(AppError):
+    """命中公众人物禁克隆库。"""
+
+    code = "BANNED_PERSON"
+    status = 422
+    message = "命中公众人物禁克隆名单"
+
+
 class EngineUnavailable(AppError):
     code = "ENGINE_UNAVAILABLE"
     status = 503

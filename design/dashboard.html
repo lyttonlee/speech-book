@@ -60,42 +60,73 @@
           <button data-seg-panel="view" data-val="list">列表视图</button>
         </div>
         <div class="row gap-2">
-          <select class="select" style="width:150px"><option>全部状态</option><option>草稿</option><option>待复核</option><option>合成完成</option></select>
+          <select class="select" style="width:150px"><option>全部状态</option><option>草稿</option><option>待复核</option><option>校对完成</option><option>合成完成</option></select>
           <select class="select" style="width:130px"><option>最近更新</option><option>创建时间</option><option>名称</option></select>
         </div>
       </div>
 
-      <!-- 卡片视图 -->
+      <!-- 卡片视图：卡片直接进入该书工作空间 -->
       <div data-seg-panel="view" data-val="grid" class="grid cols-3">
-        <div class="panel work-card" onclick="location.href='studio.html'">
+        <div class="panel work-card" onclick="location.href='workspace.html'">
           <div class="work-cover"></div>
-          <div class="row between"><h4>星河彼端</h4><span class="badge ok"><span class="dot"></span>合成完成</span></div>
-          <div class="work-meta"><span>科幻</span>·<span>8 章</span>·<span>3 角色</span><span class="right">2 小时前</span></div>
-          <div class="progress thin"><i style="width:100%"></i></div>
+          <div class="row between"><h4>星河彼端</h4><span class="badge ok"><span class="dot"></span>合成中 72%</span></div>
+          <div class="work-meta"><span>科幻</span>·<span>8 章</span>·<span>5 角色</span><span class="right">15:06</span></div>
+          <div class="progress thin"><i style="width:72%"></i></div>
+          <!-- v0.3：工作空间摘要（制作进度 / 解析汇总 / 已配音） -->
+          <div class="work-sum">
+            <div class="ws"><span class="k">制作进度</span><span class="v">合成 72%</span></div>
+            <div class="ws"><span class="k">已绑声纹</span><span class="v">3/4</span></div>
+            <div class="ws"><span class="k">已配音</span><span class="v">42 min</span></div>
+          </div>
+          <div class="row between"><span class="tiny muted">含 2 条待复核</span><span class="badge warn"><span class="dot"></span>需人工介入</span></div>
         </div>
-        <div class="panel work-card" onclick="location.href='studio.html'">
+        <div class="panel work-card" onclick="location.href='workspace.html'">
           <div class="work-cover" style="background:linear-gradient(135deg,rgba(99,102,241,0.25),rgba(34,211,238,0.18))"></div>
           <div class="row between"><h4>雾都夜行录</h4><span class="badge warn"><span class="dot"></span>待复核</span></div>
           <div class="work-meta"><span>悬疑</span>·<span>12 章</span>·<span>5 角色</span><span class="right">昨天</span></div>
           <div class="progress thin"><i style="width:55%"></i></div>
+          <div class="work-sum">
+            <div class="ws"><span class="k">制作进度</span><span class="v">校对 55%</span></div>
+            <div class="ws"><span class="k">已绑声纹</span><span class="v">4/5</span></div>
+            <div class="ws"><span class="k">已配音</span><span class="v">—</span></div>
+          </div>
+          <div class="row between"><span class="tiny muted">解析完成 · 未开始合成</span><span class="badge info"><span class="dot"></span>7 条低置信</span></div>
         </div>
-        <div class="panel work-card" onclick="location.href='studio.html'">
+        <div class="panel work-card" onclick="location.href='workspace.html'">
           <div class="work-cover" style="background:linear-gradient(135deg,rgba(251,191,36,0.20),rgba(251,113,133,0.18))"></div>
           <div class="row between"><h4>山海食单</h4><span class="badge info"><span class="dot"></span>解析中</span></div>
           <div class="work-meta"><span>奇幻</span>·<span>6 章</span>·<span>4 角色</span><span class="right">3 天前</span></div>
           <div class="progress thin"><i style="width:32%"></i></div>
+          <div class="work-sum">
+            <div class="ws"><span class="k">制作进度</span><span class="v">解析 32%</span></div>
+            <div class="ws"><span class="k">已绑声纹</span><span class="v">0/4</span></div>
+            <div class="ws"><span class="k">已配音</span><span class="v">—</span></div>
+          </div>
+          <div class="row between"><span class="tiny muted">解析中（SSE 推送）</span><span class="badge"><span class="dot"></span>未绑定</span></div>
         </div>
         <div class="panel work-card" onclick="location.href='studio.html'">
           <div class="work-cover" style="background:linear-gradient(135deg,rgba(52,211,153,0.20),rgba(56,189,248,0.18))"></div>
           <div class="row between"><h4>无人书店</h4><span class="badge"><span class="dot"></span>草稿</span></div>
           <div class="work-meta"><span>都市</span>·<span>1 章</span>·<span>未解析</span><span class="right">上周</span></div>
           <div class="progress thin"><i style="width:6%"></i></div>
+          <div class="work-sum">
+            <div class="ws"><span class="k">制作进度</span><span class="v">0%</span></div>
+            <div class="ws"><span class="k">已绑声纹</span><span class="v">—</span></div>
+            <div class="ws"><span class="k">已配音</span><span class="v">—</span></div>
+          </div>
+          <div class="row between"><span class="tiny muted">等待上传正文</span><span class="badge">待启动</span></div>
         </div>
-        <div class="panel work-card" onclick="location.href='studio.html'">
+        <div class="panel work-card" onclick="location.href='workspace.html'">
           <div class="work-cover" style="background:linear-gradient(135deg,rgba(56,189,248,0.28),rgba(99,102,241,0.14))"></div>
-          <div class="row between"><h4>长安十二时辰·同人</h4><span class="badge ok"><span class="dot"></span>合成完成</span></div>
+          <div class="row between"><h4>长安十二时辰·同人</h4><span class="badge ok"><span class="dot"></span>导出完成</span></div>
           <div class="work-meta"><span>历史</span>·<span>24 章</span>·<span>9 角色</span><span class="right">2 周前</span></div>
           <div class="progress thin"><i style="width:100%"></i></div>
+          <div class="work-sum">
+            <div class="ws"><span class="k">制作进度</span><span class="v">已完成</span></div>
+            <div class="ws"><span class="k">已绑声纹</span><span class="v">9/9</span></div>
+            <div class="ws"><span class="k">已配音</span><span class="v">6.2 h</span></div>
+          </div>
+          <div class="row between"><span class="tiny muted">成品已导出 · 218MB</span><span class="badge ok"><span class="dot"></span>可再次导出</span></div>
         </div>
         <!-- 新建卡片 -->
         <div class="panel work-card" style="align-items:center;justify-content:center;border-style:dashed;text-align:center" onclick="location.href='studio.html'">
@@ -110,16 +141,41 @@
       <!-- 列表视图 -->
       <div data-seg-panel="view" data-val="list" class="panel hide" style="padding:0">
         <table class="table">
-          <thead><tr><th>作品</th><th>状态</th><th>章节</th><th>角色</th><th>更新时间</th><th></th></tr></thead>
+          <thead><tr><th>作品</th><th>状态</th><th>制作进度</th><th>角色</th><th>声纹绑定</th><th>已配音</th><th>更新时间</th><th></th></tr></thead>
           <tbody>
-            <tr><td><b style="color:var(--text-1)">星河彼端</b><div class="tiny muted">科幻</div></td><td><span class="badge ok"><span class="dot"></span>合成完成</span></td><td class="mono">8</td><td class="mono">3</td><td>2 小时前</td><td class="right"><button class="btn btn-sm" onclick="location.href='studio.html'">打开</button></td></tr>
-            <tr><td><b style="color:var(--text-1)">雾都夜行录</b><div class="tiny muted">悬疑</div></td><td><span class="badge warn"><span class="dot"></span>待复核</span></td><td class="mono">12</td><td class="mono">5</td><td>昨天</td><td class="right"><button class="btn btn-sm" onclick="location.href='studio.html'">打开</button></td></tr>
-            <tr><td><b style="color:var(--text-1)">山海食单</b><div class="tiny muted">奇幻</div></td><td><span class="badge info"><span class="dot"></span>解析中</span></td><td class="mono">6</td><td class="mono">4</td><td>3 天前</td><td class="right"><button class="btn btn-sm" onclick="location.href='studio.html'">打开</button></td></tr>
+            <tr>
+              <td><b style="color:var(--text-1)">星河彼端</b><div class="tiny muted">科幻</div></td>
+              <td><span class="badge ok"><span class="dot"></span>合成中</span></td>
+              <td><div style="width:120px"><div class="progress thin"><i style="width:72%"></i></div><span class="tiny muted">72%</span></div></td>
+              <td class="mono">5</td><td class="mono" style="color:var(--warn)">3/4</td><td class="mono">42 min</td><td>15:06</td>
+              <td class="right"><button class="btn btn-sm" onclick="location.href='workspace.html'">进入工作空间</button></td>
+            </tr>
+            <tr>
+              <td><b style="color:var(--text-1)">雾都夜行录</b><div class="tiny muted">悬疑</div></td>
+              <td><span class="badge warn"><span class="dot"></span>待复核</span></td>
+              <td><div style="width:120px"><div class="progress thin"><i style="width:55%"></i></div><span class="tiny muted">55%</span></div></td>
+              <td class="mono">5</td><td class="mono" style="color:var(--warn)">4/5</td><td class="mono muted">—</td><td>昨天</td>
+              <td class="right"><button class="btn btn-sm" onclick="location.href='workspace.html'">进入工作空间</button></td>
+            </tr>
+            <tr>
+              <td><b style="color:var(--text-1)">山海食单</b><div class="tiny muted">奇幻</div></td>
+              <td><span class="badge info"><span class="dot"></span>解析中</span></td>
+              <td><div style="width:120px"><div class="progress thin"><i style="width:32%"></i></div><span class="tiny muted">32%</span></div></td>
+              <td class="mono">4</td><td class="mono muted">0/4</td><td class="mono muted">—</td><td>3 天前</td>
+              <td class="right"><button class="btn btn-sm" onclick="location.href='workspace.html'">进入工作空间</button></td>
+            </tr>
+            <tr>
+              <td><b style="color:var(--text-1)">长安十二时辰·同人</b><div class="tiny muted">历史</div></td>
+              <td><span class="badge ok"><span class="dot"></span>导出完成</span></td>
+              <td><div style="width:120px"><div class="progress thin"><i style="width:100%"></i></div><span class="tiny muted">100%</span></div></td>
+              <td class="mono">9</td><td class="mono" style="color:var(--ok)">9/9</td><td class="mono">6.2 h</td><td>2 周前</td>
+              <td class="right"><button class="btn btn-sm" onclick="location.href='workspace.html'">进入工作空间</button></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <p class="hint mt-8">交互说明：卡片/列表视图切换、点击作品进入工作室；状态徽标与进度条映射作品状态机（draft → parsing → pending_review → synthesizing → synth_done）。</p>
+      <p class="hint mt-8">交互说明：卡片/列表视图切换；<b>点击作品进入该书的工作空间</b>（workspace.html：制作进度流水线 + 解析内容汇总 + 角色声纹绑定 + 关系图 + 已解析章节 + 已制作配音 + 人工留痕 + 导出）。状态徽标与进度条映射作品状态机（draft → 文本已上传 → 解析中 → 待校对 → 校对完成 → 合成中 → 合成完成 → 导出中 → 已完成）。</p>
     </div>
   </main>
 </div>

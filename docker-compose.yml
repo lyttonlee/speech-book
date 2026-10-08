@@ -1,0 +1,171 @@
+# ============================================================
+# AI Audiobook Studio · 完整栈编排
+#
+# 服务清单（6 个）：
+#   db      PostgreSQL 16 + pgvector   主库 + 向量检索扩展
+#   redis   Redis 7                    SSE 进度广播 / 生产任务队列
+#   minio   MinIO                      对象存储（音频、样本、导出包）
+#   backend FastAPI (uvicorn)          业务 API
+#   web     nginx                      前端静态 + /api、/files 反代
+#
+# 快速开始（根目录执行）：
+#   cp .env.example .env          # 改掉所有 change-me 之类的口令
+#   docker compose up -d --build  # 或直接 docker compose pull && up -d
+#   docker compose ps             # backend healthy + web up 即成功
+#
+# 轻量 POC（不依赖任何中间件，SQLite + 本地文件 + 内存进度）：
+#   docker compose -f docker-compose.yml -f docker-compose.poc.yml up -d
+#
+# 所有可调项都来自根目录 .env（compose 自动读取同名文件）
+# ============================================================
+
+name: speech-book
+
+services:
+  # ---------------------------------------------------------- 主库：PostgreSQL + pgvector
+  # 想换 pgvecto.rs（Rust 实现，索引更快）：SB_POSTGRES_IMAGE=pgvector/pgvectors:latest
+  db:
+    image: ${SB_POSTGRES_IMAGE:-pgvector/pgvector:pg16}
+    container_name: sb-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${SB_DB_USER:-speech}
+      POSTGRES_PASSWORD: ${SB_DB_PASSWORD:-speech_secret}
+      POSTGRES_DB: ${SB_DB_NAME:-speech_book}
+      TZ: Asia/Shanghai
+    ports:
+      - "${SB_DB_PORT:-5432}:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      # 首次启动（数据卷为空）时执行：建 vector 扩展
+      - ./backend/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${SB_DB_USER:-speech} -d ${SB_DB_NAME:-speech_book}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  # ---------------------------------------------------------- Redis：进度广播 + 任务队列
+  # 需要向量索引/JSON 查询等 Redis Stack 能力时：SB_REDIS_IMAGE=redis/redis-stack-server:latest
+  redis:
+    image: ${SB_REDIS_IMAGE:-redis:7-alpine}
+    container_name: sb-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "noeviction"]
+    ports:
+      - "${SB_REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  # ---------------------------------------------------------- 对象存储（S3 协议兼容）
+  # 默认镜像用 versitygw：MinIO 官方项目已于 2025 年归档（dl.min.io 旧版文件 410、
+  # 常见镜像源对该仓库 403），versitygw 是仍在维护的 S3 网关、行为一致。
+  # 若你的环境能拉到 MinIO 镜像，改 SB_MINIO_IMAGE 即可换回 minio/minio:latest。
+  # 桶不需要预建：后端 lifespan 会调 ensure_bucket() 自动补建。
+  minio:
+    image: ${SB_MINIO_IMAGE:-versity/versitygw:latest}
+    container_name: sb-minio
+    restart: unless-stopped
+    environment:
+      # posix 后端：把 /data 下的子目录当桶用；凭据走命令行参数（见下方 command）
+      VGW_BACKEND: posix
+      TZ: Asia/Shanghai
+    command: [
+      "--access", "${SB_MINIO_USER:-minio}",
+      "--secret", "${SB_MINIO_PASSWORD:-minio_secret}",
+      "--port", ":9000",            # S3 API（与后端 SB_MINIO_ENDPOINT=minio:9000 对齐）
+      "--webui", ":9001",           # 桶浏览控制台，等价于原来 MinIO 的 Console
+      "posix", "/data"
+    ]
+    ports:
+      - "${SB_MINIO_PORT:-9000}:9000"           # S3 API
+      - "${SB_MINIO_CONSOLE_PORT:-9001}:9001"   # Web 控制台
+    volumes:
+      - minio-data:/data
+
+  # ---------------------------------------------------------- 后端：FastAPI
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sb-backend
+    ports:
+      - "${SB_BACKEND_PORT:-8000}:8000"   # 直连后端，方便 curl /health 调试
+    volumes:
+      - backend-data:/app/data            # 本地存储/临时缓冲（完整栈里主要当 scratch）
+    environment:
+      # 完整栈：接 PostgreSQL（asyncpg 驱动）+ Redis + MinIO
+      SB_DATABASE_URL: postgresql+asyncpg://${SB_DB_USER:-speech}:${SB_DB_PASSWORD:-speech_secret}@db:5432/${SB_DB_NAME:-speech_book}
+      SB_STORAGE_BACKEND: minio
+      SB_STORAGE_DIR: /app/data
+      SB_MINIO_ENDPOINT: minio:9000
+      SB_MINIO_ACCESS_KEY: ${SB_MINIO_USER:-minio}
+      SB_MINIO_SECRET_KEY: ${SB_MINIO_PASSWORD:-minio_secret}
+      SB_MINIO_BUCKET: ${SB_MINIO_BUCKET:-speech-book}
+      SB_MINIO_SECURE: "false"
+      SB_MINIO_PUBLIC_BASE_URL: ""        # 留空 = 音频走后端 /files 反代（默认，便于鉴权）
+      SB_PROGRESS_BACKEND: redis
+      SB_REDIS_URL: redis://redis:6379/0
+      SB_TASK_QUEUE_BACKEND: memory       # 上独立 worker 容器时改成 redis
+      SB_JWT_SECRET: ${SB_JWT_SECRET:-change-me-before-deploy}
+      SB_JWT_ALGORITHM: HS256
+      SB_ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      SB_CORS_ORIGINS: ${SB_CORS_ORIGINS:-["http://localhost","http://127.0.0.1"]}
+      SB_DEBUG: "false"
+      TZ: Asia/Shanghai
+    depends_on:
+      db:
+        condition: service_healthy     # 数据库真能连上才起后端
+      minio:
+        condition: service_started     # 桶由 minio 按 MINIO_DEFAULT_BUCKETS 建，后端再 ensure 一次
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
+
+  # ---------------------------------------------------------- 前端：静态页 + 反代
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: sb-web
+    ports:
+      - "${SB_WEB_PORT:-80}:80"
+    depends_on:
+      backend:
+        condition: service_healthy     # 后端就绪后 nginx 才起来，避免 502
+    healthcheck:
+      # nginx:alpine 自带 busybox wget，不打 /api 以免误判后端
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+# ============================================================
+# 数据卷：容器删除后数据仍在；只有 docker compose down -v 才清掉
+# ============================================================
+volumes:
+  pg-data:
+  redis-data:
+  minio-data:
+  backend-data:
+
+# ============================================================
+# 网络：默认 bridge，服务间用服务名互访（backend → db:5432 / redis:6379 / minio:9000）
+# ============================================================
+networks:
+  default:
+    driver: bridge
